@@ -23,12 +23,13 @@ class BuyersRegisterRequest extends FormRequest
      */
     public function rules()
     {
+        //TODO: name, invoice_name, invoice_company, invoice_tax
         return [
-            'username' => 'required|string|min:6|max:30|unique:buyers,username',
-            'password' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
+            'felhasználónév' => 'required|string|min:6|max:30|unique:buyers,username',
+            'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
             'email' => 'required|email|unique|max:30',
-            'birthday' => 'required|date',
-            'tel' => 'string|min:12|max:12',
+            'születésnap' => 'required|date',
+            'telefonszám' => 'string|min:12|max:12',
             'delivery_zip' => 'required|string|min:4|max:4',
             'delivery_address' => 'required|string|max:50',
             'delivery_city' => 'required|string|max:30',
