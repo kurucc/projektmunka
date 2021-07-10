@@ -1,0 +1,21 @@
+.bg {
+  background-image: url("background2.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: max-content;
+}
+.menuk {
+  color: chocolate !important;
+}
+.menuk:hover {
+  color: maroon !important;
+  text-decoration: underline !important;
+}
+.flex-container {
+  display: flex;
+}
+.flex-box {
+  flex: 1;
+}
