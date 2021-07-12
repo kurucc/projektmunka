@@ -1,0 +1,34 @@
+.dolgozoi_login_bg {
+  background-color: rgb(18, 18, 71);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+.wrapper div {
+  margin: 5px;
+  text-align: center;
+}
+.card-body {
+  padding: 5px !important;
+}
+.card {
+  background-color: #fab589 !important;
+  color: black;
+}
+.card-header,
+.card-footer {
+  background-color: #fab589 !important;
+}
+.dolgozoi_forgotten {
+  font-size: small;
+}
