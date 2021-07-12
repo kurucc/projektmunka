@@ -8,20 +8,20 @@ function dataEquals()
         if(document.getElementById('megegyeznek').checked == true)
         {
             for (let i = 0; i < szallitas.length; i++) {
-                szallitas[i].setAttribute('required', false);
+                szallitas[i].removeAttribute('required');
+                szallitas[i].value = "";
                 
             }
             for (let i = 0; i < maganszemely.length; i++) {
                 maganszemely[i].style.display = 'none';
-                
             }
             for (let i = 0; i < person.length; i++) {
-                person[i].setAttribute('required', false);
-                
+                person[i].removeAttribute('required');
+                person[i].value = "";
             }
             for (let i = 0; i < company.length; i++) {
-                company[i].setAttribute('required', false);
-                
+                company[i].removeAttribute('required');
+                company[i].value = "";
             }
         }
         else
@@ -54,7 +54,8 @@ function isIndividual()
             document.getElementById('person').style.display = "";
             document.getElementById('company').style.display = "none";
             for (let i = 0; i < company.length; i++) {
-                company[i].setAttribute('required', false);
+                company[i].removeAttribute('required');
+                company[i].value = "";
                 
             }
             for (let i = 0; i < person.length; i++) {
@@ -71,7 +72,8 @@ function isIndividual()
                 
             }
             for (let i = 0; i < person.length; i++) {
-                person[i].setAttribute('required', false);
+                person[i].removeAttribute('required');
+                person[i].value = "";
                 
             }
         }
