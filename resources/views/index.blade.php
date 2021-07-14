@@ -67,10 +67,11 @@
             </div>
             <a class="menuk nav-link">Szakember kereső</a>
             <a class="menuk nav-link">Kosár</a>
-            <!--If user is logged in!-->
-            <a class="menuk nav-link">Profilom</a>
-            <!--If user is not logged in!-->
-            <a class="menuk nav-link">Bejelentkezés</a>
+            @if (Auth::check())
+            <a class="menuk nav-link" href={{ url('dashboard') }}>Profilom</a>
+            @else
+            <a class="menuk nav-link" href={{ url('auth') }}>Bejelentkezés</a>
+            @endif
           </div>
         </div>
       </div>

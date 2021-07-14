@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyersAuthController;
+use App\Http\Controllers\WorkersController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,17 +15,24 @@ use App\Http\Controllers\BuyersAuthController;
 |
 */
 
+Route::get('/', function () {
+    return view('index');
+});
+
 Route::middleware(['guest'])->group(function () {
     
-    Route::get('register', [BuyersAuthController::class,'showRegister']);
-    Route::post('register', [BuyersAuthController::class,'register']);
-
-    Route::get('login', [BuyersAuthController::class,'showLogin']);
-    Route::post('login', [BuyersAuthController::class,'login']);
+    Route::get('auth', [BuyersAuthController::class,'showRegister']);
+    Route::post('auth', [BuyersAuthController::class,'register']);
 });
+
 
 Route::middleware(['auth'])->group(function () {
 
-    
+    Route::get('dashboard', [BuyersAuthController::class,'showDashboard']);
 
+});
+
+Route::middleware(['whitelist'])->group(function () {
+    
+    Route::get('workerLogin', [WorkersController::class,'showWorkersLogin']);
 });

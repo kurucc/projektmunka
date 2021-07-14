@@ -1,24 +1,16 @@
-<html lang="en">
+<html lang="hu">
   <head>
     <meta charset="utf-8" />
-    <title>BurkoLogic</title>
+    <title>{{ env('APP_NAME') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link
       rel="stylesheet"
-      href="C:\Users\user\Desktop\projekt2_sima\dolgozoi_login.css"
+      href={{ URL::asset('css/dolgozoi_login.css') }}
     />
     <link
       rel="canonical"
       href="https://getbootstrap.com/docs/4.0/examples/sign-in/"
-    />
-    <link
-      href="./Signin Template for Bootstrap_files/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="./Signin Template for Bootstrap_files/signin.css"
-      rel="stylesheet"
     />
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -50,9 +42,9 @@
         </div>
         <div class="card-body">
           <h5>Jelentkezzen be!</h5>
-          <form (ngSubmit)="addBeerPage()" #loginForm="ngForm">
+          <form method="POST">
             <div>
-              <h6>Login név:</h6>
+              <h6>Login név</h6>
               <input
                 type="loginname"
                 id="loginname"
@@ -63,7 +55,7 @@
               />
             </div>
             <div>
-              <h6>Jelszó:</h6>
+              <h6>Jelszó</h6>
               <input
                 type="password"
                 id="password"

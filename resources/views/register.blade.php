@@ -307,7 +307,7 @@
 
               <div class="maganszemely" style="display:none">
                 <!--If a person this one shows up-->
-                <div class="row person" id="person" style="display:">
+                <div class="row person" id="person" style="display:''">
                   <div class="col-sm-6">
                     <label>Keresztnév</label>
                     <input

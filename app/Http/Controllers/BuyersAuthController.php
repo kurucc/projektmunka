@@ -6,11 +6,11 @@ use App\Models\Buyers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class BuyersAuthController extends Controller
 {
-    public function showRegister()
+    public function showRegister(Request $request)
     {
         return view('register');
     }
@@ -21,7 +21,7 @@ class BuyersAuthController extends Controller
             $validator = Validator::make($request->all(), [
                 'felhasználónév' => 'required|string|min:6|max:30|unique:buyers,username',
                 'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
-                'email' => 'required|email|unique|max:30',
+                'email' => 'required|email|unique:buyers,email|max:30',
                 'születésnap' => 'required|date',
                 'telefonszám' => 'string|min:12|max:12',
                 'delivery_zip' => 'required|string|min:4|max:4',
@@ -31,7 +31,9 @@ class BuyersAuthController extends Controller
                 'invoice_city' => 'required|string|max:30',
                 'invoice_address' => 'required|string|max:50',
             ]);
-
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            }
             $buyers = new Buyers;
             $buyers->username = $request->felhasználónév;
             $buyers->password = Hash::make($request->password);
