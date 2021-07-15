@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('type',25);
             $table->decimal('width',7,2);
             $table->decimal('thickness',7,2);
-            $table->integer('unit');
+            $table->string('unit',10);
             $table->string('description');
             $table->integer('sale')->nullable();
             $table->string('picture_path');
