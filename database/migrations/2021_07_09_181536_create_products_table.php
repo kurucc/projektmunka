@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->integer('barcode')->unique();
+            $table->bigInteger('barcode')->unique();
             $table->decimal('net_price',11,2);
             $table->decimal('gross_price',11,2);
             $table->decimal('VAT',11,2);

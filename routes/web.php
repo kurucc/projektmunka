@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyersAuthController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\WorkersController;
 
 /*
@@ -18,6 +19,9 @@ use App\Http\Controllers\WorkersController;
 Route::get('/', function () {
     return view('index');
 });
+
+
+Route::get('products', [ProductsController::class,'showProducts']);
 
 Route::middleware(['guest'])->group(function () {
     
