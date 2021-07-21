@@ -39,4 +39,5 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['whitelist'])->group(function () {
     
     Route::get('workerLogin', [WorkersController::class,'showWorkersLogin']);
+    Route::post('workerLogin', [WorkersController::class, 'workersLogin']);
 });

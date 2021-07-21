@@ -51,7 +51,7 @@
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
           <div class="navbar-nav ms-auto">
-            <a class="menuk nav-link"> Főoldal </a>
+            <a class="menuk nav-link" href='/'> Főoldal </a>
             <div class="nav-item dropdown">
               <a
                 class="nav-link menuk dropdown-toggle"
@@ -71,7 +71,9 @@
             </div>
             <a class="menuk nav-link">Szakember kereső</a>
             <a class="menuk nav-link">Kosár</a>
-            <a class="menuk nav-link">Profilom</a>
+            @if (Auth::check())
+              <a class="menuk nav-link" href="dashboard">Profilom</a>
+            @endif
           </div>
         </div>
       </div>

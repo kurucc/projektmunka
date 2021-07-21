@@ -110,4 +110,8 @@ class BuyersAuthController extends Controller
             }
         }
     }
+    function showDashboard()
+    {
+        
+    }
 }
