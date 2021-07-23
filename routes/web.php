@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyersAuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\WorkersController;
 
@@ -22,19 +23,16 @@ Route::get('/', function () {
 
 
 Route::get('products', [ProductsController::class,'showProducts']);
+Route::get('products/csempek', [ProductsController::class,'showCsempe']);
+Route::get('products/parketta', [ProductsController::class,'showParketta']);
 
-Route::middleware(['guest'])->group(function () {
-    
-    Route::get('auth', [BuyersAuthController::class,'showRegister']);
-    Route::post('auth', [BuyersAuthController::class,'register']);
-});
+Route::get('auth', [WorkersController::class,'showRegister']);
+Route::post('auth', [WorkersController::class,'register']);
 
+Route::get('forgotpassword', [WorkersController::class,'passwordReminder']);
 
-Route::middleware(['auth'])->group(function () {
-
-    Route::get('dashboard', [BuyersAuthController::class,'showDashboard']);
-
-});
+Route::get('dashboard', [DashboardController::class,'showDashboard'])->middleware('authCustom');
+Route::get('logout', [WorkersController::class,'logout'])->middleware('authCustom');
 
 Route::middleware(['whitelist'])->group(function () {
     

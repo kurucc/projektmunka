@@ -31,6 +31,16 @@
         <div class="card-header">
           <h4>BurkoLogic - Dolgozói bejelentkező felület!<br /></h4>
         </div>
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <p><strong>Hoppá! Valami hiba történt!</strong></p>
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="card-body">
           <h5>Jelentkezzen be!</h5>
           <form method="POST">
@@ -42,7 +52,7 @@
                 id="loginname"
                 placeholder="loginname"
                 required
-                name="loginname"
+                name="username"
                 class="form-control-sm"
               />
             </div>

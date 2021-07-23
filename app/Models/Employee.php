@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Buyers extends Authenticatable
+class Employee extends Authenticatable
 {
     use HasFactory;
-    protected $guard = 'buyers';
-    protected $table = "buyers";
+    protected $guard = 'employees';
+    protected $table = "employees";
     protected $fillable = ['username', 'password'];
     public $timestamps = false;
 }

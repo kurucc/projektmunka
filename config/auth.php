@@ -40,7 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+        'buyer' => [
+            'driver' => 'session',
+            'provider' => 'buyers',
+        ],
+        'employee' => [
+            'driver' => 'session',
+            'provider' => 'employees',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -68,7 +75,15 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
+            'model' => 'users',
+        ],
+        'buyers' => [
+            'driver' => 'eloquent',
             'model' => App\Models\Buyers::class,
+        ],
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Employee::class,
         ],
 
         // 'users' => [

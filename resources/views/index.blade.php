@@ -60,9 +60,9 @@
                 <a class="dropdown-item" href="#">Parketták</a>
               </div>
             </div>
-            <a class="menuk nav-link">Szakember kereső</a>
+            <a class="menuk nav-link" href={{ url('technicians') }}>Szakember kereső</a>
             <a class="menuk nav-link">Kosár</a>
-            @if (Auth::check())
+            @if (Auth::guard('employee')->check() || Auth::guard('buyer')->check())
             <a class="menuk nav-link" href={{ url('dashboard') }}>Profilom</a>
             @else
             <a class="menuk nav-link" href={{ url('auth') }}>Bejelentkezés</a>
