@@ -1,33 +1,16 @@
-<html lang="en">
+<html lang="hu">
   <head>
     <meta charset="utf-8" />
-    <title>BurkoLogic</title>
+    <title>{{ env('APP_NAME') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link
       rel="stylesheet"
-      href="C:\Users\user\Desktop\projekt2_sima\dolgozoi_login.css"
-    />
-    <link
-      rel="canonical"
-      href="https://getbootstrap.com/docs/4.0/examples/sign-in/"
-    />
-    <link
-      href="./Signin Template for Bootstrap_files/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="./Signin Template for Bootstrap_files/signin.css"
-      rel="stylesheet"
+      href={{ URL::asset('css/dolgozoi_login.css') }}
     />
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
       crossorigin="anonymous"
     ></script>
     <script
@@ -48,22 +31,33 @@
         <div class="card-header">
           <h4>BurkoLogic - Dolgozói bejelentkező felület!<br /></h4>
         </div>
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <p><strong>Hoppá! Valami hiba történt!</strong></p>
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="card-body">
           <h5>Jelentkezzen be!</h5>
-          <form (ngSubmit)="addBeerPage()" #loginForm="ngForm">
+          <form method="POST">
+            @csrf
             <div>
-              <h6>Login név:</h6>
+              <h6>Login név</h6>
               <input
                 type="loginname"
                 id="loginname"
                 placeholder="loginname"
                 required
-                name="loginname"
+                name="username"
                 class="form-control-sm"
               />
             </div>
             <div>
-              <h6>Jelszó:</h6>
+              <h6>Jelszó</h6>
               <input
                 type="password"
                 id="password"

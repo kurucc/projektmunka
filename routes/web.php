@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyersAuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\WorkersController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,17 +17,25 @@ use App\Http\Controllers\BuyersAuthController;
 |
 */
 
-Route::middleware(['guest'])->group(function () {
-    
-    Route::get('register', [BuyersAuthController::class,'showRegister']);
-    Route::post('register', [BuyersAuthController::class,'register']);
-
-    Route::get('login', [BuyersAuthController::class,'showLogin']);
-    Route::post('login', [BuyersAuthController::class,'login']);
+Route::get('/', function () {
+    return view('index');
 });
 
-Route::middleware(['auth'])->group(function () {
 
+Route::get('products', [ProductsController::class,'showProducts']);
+Route::get('products/csempek', [ProductsController::class,'showCsempe']);
+Route::get('products/parketta', [ProductsController::class,'showParketta']);
+
+Route::get('auth', [WorkersController::class,'showRegister']);
+Route::post('auth', [WorkersController::class,'register']);
+
+Route::get('forgotpassword', [WorkersController::class,'passwordReminder']);
+
+Route::get('dashboard', [DashboardController::class,'showDashboard'])->middleware('authCustom');
+Route::get('logout', [WorkersController::class,'logout'])->middleware('authCustom');
+
+Route::middleware(['whitelist'])->group(function () {
     
-
+    Route::get('workerLogin', [WorkersController::class,'showWorkersLogin']);
+    Route::post('workerLogin', [WorkersController::class, 'workersLogin']);
 });

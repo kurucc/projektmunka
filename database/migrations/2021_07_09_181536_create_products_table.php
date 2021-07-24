@@ -15,7 +15,7 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->integer('barcode')->unique();
+            $table->bigInteger('barcode')->unique();
             $table->decimal('net_price',11,2);
             $table->decimal('gross_price',11,2);
             $table->decimal('VAT',11,2);
@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('type',25);
             $table->decimal('width',7,2);
             $table->decimal('thickness',7,2);
-            $table->integer('unit');
+            $table->string('unit',10);
             $table->string('description');
             $table->integer('sale')->nullable();
             $table->string('picture_path');

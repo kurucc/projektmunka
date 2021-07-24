@@ -4,11 +4,13 @@
 ~~~~sql
 CREATE DATABASE burkologic
 ~~~~
-### A weboldal használatához a következő kódok lefuttatása szükséges
+### A weboldal használatához (az adatbázis random elemekkel való feltöltésével) a következő kódok lefuttatása szükséges
 ```sh
 composer install
 copy .env.example .env
 php artisan key:generate
 php artisan migrate
 php artisan serve
+php artisan db:seed --class=ProductsSeeder
+php artisan db:seed --class=CitiesSeeder
 ```

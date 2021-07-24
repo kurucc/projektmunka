@@ -7,16 +7,11 @@
 
     <link
       rel="stylesheet"
-      href="C:\Users\user\Desktop\projekt2_sima\mainpage.css"
+      href="{{ URL::asset('css/mainpage.css') }}"
     />
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
       crossorigin="anonymous"
     ></script>
     <script
@@ -65,12 +60,13 @@
                 <a class="dropdown-item" href="#">Parketták</a>
               </div>
             </div>
-            <a class="menuk nav-link">Szakember kereső</a>
+            <a class="menuk nav-link" href={{ url('technicians') }}>Szakember kereső</a>
             <a class="menuk nav-link">Kosár</a>
-            <!--If user is logged in!-->
-            <a class="menuk nav-link">Profilom</a>
-            <!--If user is not logged in!-->
-            <a class="menuk nav-link">Bejelentkezés</a>
+            @if (Auth::guard('employee')->check() || Auth::guard('buyer')->check())
+            <a class="menuk nav-link" href={{ url('dashboard') }}>Profilom</a>
+            @else
+            <a class="menuk nav-link" href={{ url('auth') }}>Bejelentkezés</a>
+            @endif
           </div>
         </div>
       </div>
