@@ -11,9 +11,10 @@
         <p>{{ $value->id }}</p>
         <p>{{ $value->name }}</p>
         <p>{{ $value->sale }}</p>
+        <p>{{ $value->gross_price }}</p>
         <br>
     @endforeach
 
-    {{ $projects->links()}}
+    {{ $projects->appends($_GET)->links()}}
 </body>
 </html>

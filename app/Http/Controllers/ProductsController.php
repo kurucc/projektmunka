@@ -18,10 +18,13 @@ class ProductsController extends Controller
         $query = Products::query();
         if(!empty($searchText)) {
             $query->where(function($query) use($searchText){
-                $query->where('name','like', '%'.$searchText . '%');
+                $query->where('name','like', '%'.$searchText . '%')
+                ->orWhere('color','like', '%'.$searchText . '%');
+                
             });
         }
         $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
+        
         return view('products',compact('projects'));
     }
 }

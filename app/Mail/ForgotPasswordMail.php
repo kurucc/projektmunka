@@ -29,6 +29,6 @@ class ForgotPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Teszt ímél')->view('email');
+        return $this->subject('Elfelejtett jelszó')->view('email');
     }
 }
