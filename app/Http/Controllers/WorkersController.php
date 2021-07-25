@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ForgotPasswordMail;
+use App\Models\Buyers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class WorkersController extends Controller
 {
@@ -29,23 +34,20 @@ class WorkersController extends Controller
                 'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
                 'email' => 'required|email|unique:buyers,email|max:30',
                 'születésnap' => 'required|date',
-                'telefonszám' => 'string|min:12|max:12',
+                'telefonszám' => 'nullable|string|min:12|max:12',
                 'delivery_zip' => 'required|string|min:4|max:4',
                 'delivery_address' => 'required|string|max:50',
                 'delivery_city' => 'required|string|max:30',
-                'invoice_zip' => 'required|string|min:4|max:4',
-                'invoice_city' => 'required|string|max:30',
-                'invoice_address' => 'required|string|max:50',
             ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator);
             }
             $buyers = new Buyers;
             $buyers->username = $request->felhasználónév;
-            $buyers->password = Hash::make($request->password);
+            $buyers->password = Hash::make($request->jelszó);
             $buyers->email = $request->email;
-            $buyers->birthday = $request->birthday;
-            $buyers->tel = $request->tel;
+            $buyers->birthday = $request->születésnap;
+            $buyers->tel = $request->telefonszám;
             $buyers->name = $request->firstname . " " . $request->lastname;
             $buyers->delivery_zip = $request->delivery_zip;
             $buyers->delivery_address = $request->delivery_address;
@@ -96,7 +98,7 @@ class WorkersController extends Controller
                     return redirect()->back()->with('siker', 'Sikeres regisztráció, jelentkezz be!');   
                 }
             } catch (\Throwable $th) {
-                return redirect()->back()->withErrors("Sikertelen regisztráció, próbáld újra!");
+                return redirect()->back()->withErrors('Sikertelen regisztráció, próbáld meg újra!');
             }
         }
         else if($request->has('login'))
@@ -148,9 +150,22 @@ class WorkersController extends Controller
         }
         return redirect('/');
     }
-    function passwordReminder(Request $request)
+    function passwordReminderShow(Request $request)
     {
-        /*Mail::to($request->email)->send(new ForgotPasswordMail(['title' => 'Elfelejtett jelszó', 'body' => 'test']));
-        return 'Email sent';*/
+        return view('email');
+    }
+    function passwordReminderSend(Request $request)
+    {   
+        if(Buyers::where('email', '=', $request->email)->exists())
+        {
+            $pw = Str::random(6);
+            DB::update('update buyers set password = ? where email = ?', [Hash::make($pw),$request->email]);
+            Mail::to($request->email)->send(new ForgotPasswordMail(['name' =>Buyers::where('email', '=', $request->email)->get('username'),'pw' => $pw]));
+            return redirect()->back()->with('siker', 'Az e-mail sikeresen elküldve!');
+        }
+        else
+        {
+            return redirect()->back()->withErrors(['message' => 'Ehhez az email címhez nem tartozik felhasználó.']);
+        }
     }
 }

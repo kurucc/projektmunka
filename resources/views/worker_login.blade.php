@@ -67,9 +67,7 @@
                 name="password"
                 class="form-control-sm"
               />
-
               <br />
-              <div class="dolgozoi_forgotten">Elfelejtette a jelszavát?</div>
             </div>
             <div>
               <input

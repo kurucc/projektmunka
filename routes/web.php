@@ -22,14 +22,15 @@ Route::get('/', function () {
 });
 
 
-Route::get('products', [ProductsController::class,'showProducts']);
-Route::get('products/csempek', [ProductsController::class,'showCsempe']);
-Route::get('products/parketta', [ProductsController::class,'showParketta']);
+Route::get('products', [ProductsController::class,'showProductsPage']);
+Route::get('products/csempe', [ProductsController::class,'showProducts']);
+Route::get('products/parketta', [ProductsController::class,'showProducts']);
 
 Route::get('auth', [WorkersController::class,'showRegister']);
 Route::post('auth', [WorkersController::class,'register']);
 
-Route::get('forgotpassword', [WorkersController::class,'passwordReminder']);
+Route::get('forgotpassword', [WorkersController::class,'passwordReminderShow']);
+Route::post('forgotpassword', [WorkersController::class,'passwordReminderSend']);
 
 Route::get('dashboard', [DashboardController::class,'showDashboard'])->middleware('authCustom');
 Route::get('logout', [WorkersController::class,'logout'])->middleware('authCustom');

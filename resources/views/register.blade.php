@@ -129,7 +129,7 @@
               />
 
               <br />
-              <div class="forgotten">Elfelejtette a jelszavát?</div>
+              <div class="forgotten"><a href="forgotpassword"> Elfelejtette a jelszavát? </a></div>
             </div>
             <div>
             <button type="submit" class="btn btn-outline-light login" name="login">Bejelentkezés</button>
@@ -217,7 +217,7 @@
                 <label>Jelszó</label><br>
                   <input
                     type="password"
-                    name="password"
+                    name="jelszó"
                     class="form-control-sm"
                     required
                     placeholder="peldapeter"
@@ -231,7 +231,7 @@
                   <label>Telefonszám</label>
                   <input
                     type="text"
-                    name="tel"
+                    name="telefonszám"
                     class="form-control-sm"
                     placeholder="+36123456789"
                   />
@@ -253,7 +253,7 @@
                   <label>Születési idő</label>
                   <input
                     type="date"
-                    name="birthday"
+                    name="születésnap"
                     class="form-control-sm"
                     required
                   />

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Buyers;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,7 +12,7 @@ class ForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $detals;
+    public $details;
     /**
      * Create a new message instance.
      *
@@ -29,6 +30,6 @@ class ForgotPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Elfelejtett jelszó')->view('email');
+        return $this->subject('Elfelejtett jelszó')->view('forgotpass', $this->details);
     }
 }
