@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyersAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\WorkersController;
 
 /*
@@ -40,3 +41,5 @@ Route::middleware(['whitelist'])->group(function () {
     Route::get('workerLogin', [WorkersController::class,'showWorkersLogin']);
     Route::post('workerLogin', [WorkersController::class, 'workersLogin']);
 });
+
+Route::get('technicians', [TechnicianController::class,'showTechnicians']);
