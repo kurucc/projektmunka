@@ -126,31 +126,40 @@
 
 
                 <div id="content-open" >
-
                     <div class="item-open">
-                        <div class="sidenav-item dropdown">
-                            <h6
-                                class="sidenav-item szurok dropdown-toggle"
-                                id="sidenavbarDropdown"
-                                role="button"
-                                data-toggle="dropdown-sidenav"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
-                                    <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-                                </svg>
-                                Szűrők
-                            </h6>
-                        </div>
-                            <div
-                                class="dropdown-sidenav"
-                                aria-labelledby="sidenavbarDropdown"
-                            >
-                                <p>Színek</p>
-                            </div>
+                        <h6
+                        >
+                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                             <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                          </svg>
+                            Szűrők
+                        </h6>
 
+                        <div class="row filters">
+                            <label>Színek</label> <br>
+                            <div class="col-ms-2">
+                            <input class="checkbox" type="checkbox"> Fekete </input>
+                            <input class="checkbox" type="checkbox"> Fehér </input>
+                            <input class="checkbox" type="checkbox"> Kék </input>
+
+                            <input class="checkbox" type="checkbox"> Narancs </input>
+                            <input class="checkbox" type="checkbox"> Lila </input>
+                             <input class="checkbox" type="checkbox"> Zöld </input>
+                             <input class="checkbox" type="checkbox"> Szürke </input>
+
+                            <input class="checkbox" type="checkbox"> Piros </input>
+
+
+
+                            <input class="checkbox" type="checkbox"> Bézs </input>
+
+                             <input class="checkbox" type="checkbox"> Rózsaszín </input>
+
+                            </div>
+                        </div>
                     </div>
+
+
                     <div class="item-open">
                         <h6>
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-calculator" viewBox="0 0 16 16">
