@@ -1,5 +1,4 @@
 .bg {
-  background-image: url("background2.jpg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -20,14 +19,4 @@
   flex: 1;
 }
 
-@media all and (min-width: 992px) {
-	.navbar .nav-item .dropdown-menu{ 
-    display: none;
-   }
-	.navbar .nav-item:hover .dropdown-menu{ 
-    display: block;
-   }
-	.navbar .nav-item .dropdown-menu{ 
-    margin-top:0;
-   }
-}	
+
