@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\URL;
 
 class ProductsController extends Controller
 {
+    function showProductsPage()
+    {
+        return view('products');
+    }
     function showProducts(ProductRequest $request)
     {
         $searchText = $request->get('searchText');
