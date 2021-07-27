@@ -48,7 +48,21 @@ class ProductsController extends Controller
             $query->where('sale', '<>', 'NULL');
         }
         if(!empty($color)) {
-            $query->where('color', '=', $color);
+            $array = explode(',',$color);
+
+            if(count($array) > 1)
+            {
+                $query->where(function($query) use($array){
+                    $query->where('color', '=', $array[0]);
+                    for ($i=1; $i < count($array); $i++) { 
+                        $query->orWhere('color', '=', $array[$i]);
+                    }
+                });
+            }
+            else
+            {
+                $query->where('color', '=', $color);
+            }
         }
         $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
         

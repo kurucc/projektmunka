@@ -138,22 +138,22 @@
                         <div class="row filters">
                             <label>Színek</label> <br>
                             <div class="col-ms-2">
-                            <input class="checkbox" type="checkbox"> Fekete </input>
-                            <input class="checkbox" type="checkbox"> Fehér </input>
-                            <input class="checkbox" type="checkbox"> Kék </input>
+                            <input class="checkbox" type="checkbox"> Fekete
+                            <input class="checkbox" type="checkbox"> Fehér
+                            <input class="checkbox" type="checkbox"> Kék
 
-                            <input class="checkbox" type="checkbox"> Narancs </input>
-                            <input class="checkbox" type="checkbox"> Lila </input>
-                             <input class="checkbox" type="checkbox"> Zöld </input>
-                             <input class="checkbox" type="checkbox"> Szürke </input>
+                            <input class="checkbox" type="checkbox"> Narancs
+                            <input class="checkbox" type="checkbox"> Lila
+                             <input class="checkbox" type="checkbox"> Zöld
+                             <input class="checkbox" type="checkbox"> Szürke
 
-                            <input class="checkbox" type="checkbox"> Piros </input>
+                            <input class="checkbox" type="checkbox"> Piros
 
 
 
-                            <input class="checkbox" type="checkbox"> Bézs </input>
+                            <input class="checkbox" type="checkbox"> Bézs
 
-                             <input class="checkbox" type="checkbox"> Rózsaszín </input>
+                             <input class="checkbox" type="checkbox"> Rózsaszín
 
                             </div>
                         </div>
@@ -173,7 +173,7 @@
             </nav>
         </div>
         @foreach ($projects as $key => $value)
-                <p>{{ $value->id }}</p>
+                <p>{{ $value->color }}</p>
                 <p>{{ $value->name }}</p>
                 <p>{{ $value->sale }}</p>
                 <p>{{ $value->gross_price }}</p>

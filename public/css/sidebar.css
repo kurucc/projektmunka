@@ -55,17 +55,6 @@
         display: none;
     }
 }
-@media all and (min-width: 992px) {
-    .navbar .nav-item .dropdown-menu{
-        display: none;
-    }
-    .navbar .nav-item:hover .dropdown-menu{
-        display: block;
-    }
-    .navbar .nav-item .dropdown-menu{
-        margin-top:0;
-    }
-}
 .checkbox {
    margin: 5px !important;
 }

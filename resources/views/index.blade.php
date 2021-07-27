@@ -46,7 +46,7 @@
             <div class="nav-item dropdown">
               <a
                 class="nav-link menuk dropdown-toggle"
-                href="#"
+                href="products"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -56,8 +56,8 @@
                 Termékek
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Csempék</a>
-                <a class="dropdown-item" href="#">Parketták</a>
+                <a class="dropdown-item" href="products/csempe">Csempék</a>
+                <a class="dropdown-item" href="products/parketta">Parketták</a>
               </div>
             </div>
             <a class="menuk nav-link" href={{ url('technicians') }}>Szakember kereső</a>
