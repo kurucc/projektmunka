@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BuyersAuthController;
 use App\Http\Controllers\DashboardController;
@@ -22,7 +23,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-
 Route::get('products', [ProductsController::class,'showProductsPage']);
 Route::get('products/csempe', [ProductsController::class,'showProducts']);
 Route::get('products/parketta', [ProductsController::class,'showProducts']);
@@ -43,3 +43,24 @@ Route::middleware(['whitelist'])->group(function () {
 });
 
 Route::get('technicians', [TechnicianController::class,'showTechnicians']);
+
+///---------------ADMIN---------------
+Route::middleware(['isAdmin'])->group(function () {
+    Route::get('dashboard/admin', [AdminController::class,'getAdminPage']);
+
+    Route::get('dashboard/admin/delete/employee/{employees}', [AdminController::class,'deleteEmployee']);
+
+    Route::post('dashboard/admin/update/employee/{employees}', [AdminController::class,'updateEmployee']);
+    Route::get('dashboard/admin/update/employee/{employees}', [AdminController::class,'getEmployeeUpdate']);
+
+    Route::get('dashboard/admin/create/employee', [AdminController::class,'getEmployeeCreate']);
+    Route::post('dashboard/admin/create/employee', [AdminController::class,'createEmployee']);
+
+    Route::get('dashboard/admin/delete/buyer/{buyers}', [AdminController::class,'deleteBuyer']);
+
+    Route::get('dashboard/admin/update/buyer/{buyers}', [AdminController::class,'getBuyerUpdate']);
+    Route::post('dashboard/admin/update/buyer/{buyers}', [AdminController::class,'updateBuyer']);
+
+    Route::get('dashboard/admin/create/buyer', [AdminController::class,'getBuyerCreate']);
+    Route::post('dashboard/admin/create/buyer', [AdminController::class,'createBuyer']);
+});
