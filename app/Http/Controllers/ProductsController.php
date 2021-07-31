@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class ProductsController extends Controller
 {
+    public function showUniqueProducts($name, $color)
+    {
+        $prods = DB::table('products')
+        ->where('color', '=', $color)
+        ->where('name', '=', $name)
+        ->get();
+
+        return view('productsUnique', compact('prods'));
+    }
     function showProductsPage()
     {
         return view('products');

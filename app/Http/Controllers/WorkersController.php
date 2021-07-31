@@ -131,7 +131,14 @@ class WorkersController extends Controller
         if(Auth::guard('employee')->attempt($credentials))
         {
             $request->session()->regenerate();
-            return redirect('/');
+            if(Auth::guard('employee')->user()->role === 'admin')
+            {
+                return redirect('/dashboard/admin');
+            }
+            else
+            {
+                return redirect('/dashboard/worker');
+            }
         }
         else
         {

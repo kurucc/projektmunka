@@ -38,15 +38,15 @@ class AdminController extends Controller
     function createEmployee(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string|min:6|max:30|unique:employees,username',
+            'felhasználónév' => 'required|string|min:6|max:30|unique:employees,username',
             'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
             'email' => 'required|email|unique:employees,email|max:30',
             'születésnap' => 'required|date',
             'tel' => 'nullable|string|min:12|max:12',
-            'tax_num' => 'required|unique:employees,tax_num',
-            'SSN' => 'required|unique:employees,SSN',
-            'bank_account_number' => 'required|unique:employees,bank_account_number',
-            'role' => 'required|in:munkás'
+            'adószám' => 'required|unique:employees,tax_num',
+            'tajszám' => 'required|unique:employees,SSN',
+            'bankszámlaszám' => 'required|unique:employees,bank_account_number',
+            'jogkör' => 'required|in:munkás'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
@@ -68,20 +68,19 @@ class AdminController extends Controller
     function updateEmployee(Employee $employees, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string|min:6|max:30|unique:employees,username',
+            'felhasználónév' => 'required|string|min:6|max:30',
             'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
-            'email' => 'required|email|unique:employees,email|max:30',
+            'email' => 'required|email|max:30',
             'születésnap' => 'required|date',
             'tel' => 'nullable|string|min:12|max:12',
-            'tax_num' => 'required|unique:employees,tax_num',
-            'SSN' => 'required|unique:employees,SSN',
-            'bank_account_number' => 'required|unique:employees,bank_account_number',
-            'role' => 'required|in:munkás'
+            'adószám' => 'required',
+            'tajszám' => 'required',
+            'bankszámlaszám' => 'required',
+            'jogkör' => 'required|in:munkás'
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-
         $employees->where('id', '=', $request->id)
         ->update([
             'username' => $request->felhasználónév,
@@ -143,9 +142,9 @@ class AdminController extends Controller
     function updateBuyer(Buyers $buyers, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'felhasználónév' => 'required|string|min:6|max:30|unique:buyers,username',
+            'felhasználónév' => 'required|string|min:6|max:30',
             'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
-            'email' => 'required|email|unique:buyers,email|max:30',
+            'email' => 'required|email|max:30',
             'születésnap' => 'required|date',
             'telefonszám' => 'nullable|string|min:12|max:12',
             'delivery_zip' => 'required|string|min:4|max:4',
