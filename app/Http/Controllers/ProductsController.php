@@ -5,10 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductRequest;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class ProductsController extends Controller
 {
+    public function showUniqueProducts($name, $color)
+    {
+        $prods = DB::table('products')
+        ->where('color', '=', $color)
+        ->where('name', '=', $name)
+        ->get();
+
+        return view('productsUnique', compact('prods'));
+    }
     function showProductsPage()
     {
         return view('products');
@@ -48,7 +58,21 @@ class ProductsController extends Controller
             $query->where('sale', '<>', 'NULL');
         }
         if(!empty($color)) {
-            $query->where('color', '=', $color);
+            $array = explode(',',$color);
+
+            if(count($array) > 1)
+            {
+                $query->where(function($query) use($array){
+                    $query->where('color', '=', $array[0]);
+                    for ($i=1; $i < count($array); $i++) { 
+                        $query->orWhere('color', '=', $array[$i]);
+                    }
+                });
+            }
+            else
+            {
+                $query->where('color', '=', $color);
+            }
         }
         $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
         

@@ -26,6 +26,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('delivered');
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoice')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

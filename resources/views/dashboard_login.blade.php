@@ -181,3 +181,10 @@
 </div>
 </div>
 @include('footer')
+
+@if (Auth::guard('employee')->check() && Auth::guard('employee')->user()->role === 'admin')
+    <a href={{ url('dashboard/admin') }}>Admin</a>
+@endif
+
+@include('footer')
+@include('footer')
