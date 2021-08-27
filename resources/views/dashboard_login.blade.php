@@ -1,6 +1,9 @@
 @include('header')
-<a href={{ url('logout') }}>Logout</a>
+<div class="background">
+<div class="container d-flex alig-items-center py-3">
 <h2>Helló USERNAME!</h2>
+<button type="submit" class="btn btn-light logout-btn mx-5"> <a class="logout" href={{ url('logout') }}>Logout</a> </button>
+</div>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -96,7 +99,7 @@
                           />
                         </div>
                       </div>
-
+                      <br>
                       <div class="row">
                       <label><h5>Szállítási adatok</h5></label>
                      <div class="col-sm-6">
@@ -112,16 +115,31 @@
                           <label>Cím</label> <br>
                           <input type="text" class="form-control-sm" name="delivery_zip" disabled placeholder="ADDRESS"/>
                       </div>
+                      <br>
+                      <div class="row maganszemely">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="individual"
+                    checked
+                    onclick="isIndividual()"
+                  />
+                  <label class="form-check-label" for="flexCheckChecked">
+                    Magánszemély vagyok
+                  </label>
+                </div>
+              </div>
 
-
-                        <!--If a person this one shows up-->
-                        <div class="row maganszemely">
+                      <!--If a person this one shows up-->
+                        <div class="row maganszemely person" id="person" style="display:''">
                         <label><h5>Számlázási adatok</h5></label>
                          <div class="col-sm-6">
                           <label>Keresztnév</label> <br>
                           <input
                             type="text"
-                            class="form-control-sm"
+                            class="form-control-sm personreq"
                             name="firstname"
                             disabled
                             placeholder="FIRSTNAME"
@@ -132,7 +150,7 @@
                           <input
                             type="text"
                             name="lastname"
-                            class="form-control-sm"
+                            class="form-control-sm personreq"
                             disabled
                             placeholder="LASTNAME"
                           />
@@ -140,13 +158,13 @@
 
                       </div>
                         <!--If a company this one shows up-->
-                        <div class="row company">
+                        <div class="row company" id="company" style="display:none">
                         <label><h5>Számlázási adatok</h5></label>
                          <div class="col-sm-6">
                           <label>Cég név</label> <br>
                           <input
                             type="text"
-                            class="form-control-sm"
+                            class="form-control-sm companyreq"
                             name="firstname"
                             disabled
                             placeholder="COMPANYNAME"
@@ -157,7 +175,7 @@
                           <input
                             type="text"
                             name="lastname"
-                            class="form-control-sm"
+                            class="form-control-sm companyreq"
                             disabled
                             placeholder="TAXNUMBER"
                           />
@@ -178,6 +196,7 @@
                           <label>Cím</label> <br>
                           <input type="text" class="form-control-sm" name="delivery_zip" disabled placeholder="ADDRESS"/>
                       </div>
+</div>
 </div>
 </div>
 @include('footer')
