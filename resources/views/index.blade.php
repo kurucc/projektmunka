@@ -72,6 +72,10 @@
       </div>
     </nav>
 
-    <div class="bg"></div>
+    <div class="bg">
+        <div class="welcome"></div>
+        <div class="products"></div>
+        <div class="technicians"></div>
+    </div>
   </body>
 </html>
