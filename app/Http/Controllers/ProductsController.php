@@ -42,7 +42,7 @@ class ProductsController extends Controller
         if(!empty($searchText)) {
             $query->where(function($query) use($searchText){
                 $query->where('name','like', '%'.$searchText . '%');
-                
+
             });
         }
         if((!empty($priceFrom)) && (!empty($priceTo))) {
@@ -64,7 +64,7 @@ class ProductsController extends Controller
             {
                 $query->where(function($query) use($array){
                     $query->where('color', '=', $array[0]);
-                    for ($i=1; $i < count($array); $i++) { 
+                    for ($i=1; $i < count($array); $i++) {
                         $query->orWhere('color', '=', $array[$i]);
                     }
                 });
@@ -75,7 +75,7 @@ class ProductsController extends Controller
             }
         }
         $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
-        
-        return view('products',compact('projects'));
+
+        return view('shop',compact('projects'));
     }
 }
