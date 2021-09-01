@@ -1,0 +1,26 @@
+.background {
+    background-color: rgb(18, 18, 71) ;
+    height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: max-content;
+  color: white;
+}
+input {
+    color:white;
+}
+
+input::placeholder{
+    color:white;
+}
+.logout {
+    font-size: 20px;
+    text-decoration: none;
+    color:rgb(18, 18, 71);
+}
+
+.logout:hover {
+    color:black;
+    font-weight: bold;
+}

@@ -13,4 +13,5 @@ php artisan migrate
 php artisan serve
 php artisan db:seed --class=ProductsSeeder
 php artisan db:seed --class=CitiesSeeder
+php artisan db:seed --class=AdminSeeder
 ```

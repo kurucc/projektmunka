@@ -1,10 +1,4 @@
-.bg {
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-width: max-content;
-}
+
 .menuk {
   color: chocolate !important;
 }
@@ -12,12 +6,14 @@
   color: maroon !important;
   text-decoration: underline !important;
 }
-.flex-container {
-  display: flex;
+.products {
+    background-color: chocolate;
+
 }
-.flex-box {
-  flex: 1;
+.technicians {
+    background-color: bisque;
 }
+
 
 @media all and (min-width: 992px) {
   .navbar .nav-item .dropdown-menu{
