@@ -1,31 +1,5 @@
-<html lang="hu">
-  <head>
-    <meta charset="utf-8" />
-    <title>{{ env('APP_NAME') }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link
-      rel="stylesheet"
-      href={{ URL::asset('css/dolgozoi_login.css') }}
-    />
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
+@include('header')
+<link rel="stylesheet" href={{ URL::asset('css/dolgozoi_login.css') }} />
     <div class="dolgozoi_login_bg wrapper">
       <div class="card text-center">
         <div class="card-header">
@@ -81,5 +55,4 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
+@include('footer')

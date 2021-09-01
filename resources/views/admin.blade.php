@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@include('header')
     @if (count($buyers) > 0)
     <table>
         <tbody>
@@ -92,5 +84,4 @@
     <h3>Nem található alkalmazott! :(</h3>
     @endif
     <button><a href={{ url('dashboard/admin/create/employee') }}>Létrehozás</a></button>
-</body>
-</html>
+@include('footer')

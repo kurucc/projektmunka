@@ -9,6 +9,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $table = 'orders';
+    protected $primaryKey = 'id';
     public $fillable = [
         'order_number', 
         'user_id',
@@ -19,4 +20,8 @@ class Order extends Model
         'delivered',
         'invoice_id'
     ];
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'order_id', 'orders.id');
+    }
 }

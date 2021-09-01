@@ -139,23 +139,21 @@ class EmployeeController extends Controller
     {
         if($request->has('csempeRendeles'))
         {
+            $invoice = Invoice::create(['invoice_number' => rand(111111,999999), 'billed' => 0]);
+            $orders = Order::create([
+                'order_number' => $invoice->id,
+                'user_id' => Users::where('employee_id' , '=', Auth::guard('employee')->user()->id)->get()[0]['id'],
+                'direction' => 1,
+                'net_sum' => 0,
+                'gross_sum' => 0,
+                'VAT_sum' => 27,
+                'delivered' => 0,
+                'invoice_id' => $invoice->id
+            ]);
             foreach ($request->csempe as $key => $value) 
             {
                 if(!empty($value))
                 {
-                    $net = Products::where('id', '=', $key)->get('net_price')[0]['net_price'];
-                    $gross = Products::where('id', '=', $key)->get('gross_price')[0]['gross_price'];
-                    $invoice = Invoice::create(['invoice_number' => rand(111111,999999), 'billed' => 0]);
-                    $orders = Order::create([
-                        'order_number' => $invoice->id,
-                        'user_id' => Users::where('employee_id' , '=', Auth::guard('employee')->user()->id)->get()[0]['id'],
-                        'direction' => 1,
-                        'net_sum' => $net,
-                        'gross_sum' => $gross,
-                        'VAT_sum' => 27,
-                        'delivered' => 0,
-                        'invoice_id' => $invoice->id
-                    ]);
                     Item::create([
                         'order_id' => $orders->id,
                         'product_id' => $key,
@@ -167,23 +165,21 @@ class EmployeeController extends Controller
         }
         else if($request->has('parkettaRendeles'))
         {
+            $invoice = Invoice::create(['invoice_number' => rand(111111,999999), 'billed' => 0]);
+            $orders = Order::create([
+                'order_number' => $invoice->id,
+                'user_id' => Users::where('employee_id' , '=', Auth::guard('employee')->user()->id)->get()[0]['id'],
+                'direction' => 1,
+                'net_sum' => 0,
+                'gross_sum' => 0,
+                'VAT_sum' => 27,
+                'delivered' => 0,
+                'invoice_id' => $invoice->id
+            ]);
             foreach ($request->parketta as $key => $value) 
             {
                 if(!empty($value))
                 {
-                    $net = Products::where('id', '=', $key)->get('net_price')[0]['net_price'];
-                    $gross = Products::where('id', '=', $key)->get('gross_price')[0]['gross_price'];
-                    $invoice = Invoice::create(['invoice_number' => rand(111111,999999), 'billed' => 0]);
-                    $orders = Order::create([
-                        'order_number' => $invoice->id,
-                        'user_id' => Users::where('employee_id' , '=', Auth::guard('employee')->user()->id)->get()[0]['id'],
-                        'direction' => 1,
-                        'net_sum' => $net * $value,
-                        'gross_sum' => ($net * $value) * 1.27,
-                        'VAT_sum' => 27,
-                        'delivered' => 0,
-                        'invoice_id' => $invoice->id
-                    ]);
                     Item::create([
                         'order_id' => $orders->id,
                         'product_id' => $key,

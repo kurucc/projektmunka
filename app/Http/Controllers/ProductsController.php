@@ -3,21 +3,82 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Order;
 use App\Models\Products;
+use App\Models\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
 class ProductsController extends Controller
 {
     public function showUniqueProducts($name, $color)
     {
-        $prods = DB::table('products')
+        $currentProduct = DB::table('products')
         ->where('color', '=', $color)
         ->where('name', '=', $name)
         ->get();
 
-        return view('productsUnique', compact('prods'));
+        if(count($currentProduct) < 1)
+        {
+            return redirect('404');
+        }
+        $products        = Products::all()->toArray();
+        $selectedId      = $currentProduct[0]->id;
+        $selectedProduct = $currentProduct;
+
+        $productSimilarity = new \App\ProductSimilarity($products);
+        $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
+        $products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
+        return view('productsUnique', compact('selectedProduct', 'products'));
+    }
+    public function saveToCart($name, $color, Request $request)
+    {
+        if(empty(Auth::guard('buyer')->id()))
+        {
+            return redirect('auth');
+        }
+
+        $id = DB::table('products')
+        ->where('color', '=', $color)
+        ->where('name', '=', $name)
+        ->get()[0]->id;
+
+        $products = Products::find($id);
+        $rowId = rand(0,9999999999);
+        $userID = Auth::guard('buyer')->id();
+        $items = \Cart::session(Auth::guard('buyer')->id())->getContent();
+        foreach ($items as $item) {
+            if(($item->associatedModel->color == $request->color) && ($item->name == $request->name))
+            {
+                \Cart::session(Auth::guard('buyer')->id())->update($item->id,[
+                    'quantity' => $request->mennyiség,
+                ]);
+                return redirect('cart');
+            }
+        }
+        if(empty($products->sale))
+        {
+            $price = $products->gross_price;
+        }
+        else
+        {
+            $price = $products->gross_price * (1.00 - ($products->sale/100));
+        }
+        \Cart::session($userID)->add(array(
+            'id' => $rowId,
+            'name' => $products->name,
+            'price' => $price,
+            'quantity' => $request->mennyiség,
+            'attributes' => array(),
+            'associatedModel' => $products
+        ));
+
+        return redirect('cart');
     }
     function showProductsPage()
     {
@@ -78,4 +139,19 @@ class ProductsController extends Controller
         
         return view('products',compact('projects'));
     }
+    public function getPreviousOrders()
+    {
+        $orders = Users::with('orders')->where('buyer_id', '=', Auth::guard('buyer')->id())->get()[0]['orders'];
+
+        return view('previousOrders', compact('orders'));
+    }
+    public function getPreviousOrderItems($orderId)
+    {
+        $items = Order::join('item', 'order_id', 'orders.id')
+        ->join('products', 'products.id', 'item.product_id')
+        ->where('orders.id', '=', $orderId)->get();
+
+        return view('previousOrdersItems', compact('items'));
+    }
+    
 }

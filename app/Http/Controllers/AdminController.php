@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Buyers;
 use App\Models\Employee;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Auth;
+use Illuminate\Support\Facades\DB;
+
 class AdminController extends Controller
 {
     function getAdminPage()
@@ -52,6 +55,17 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
+        /*$employee = DB::insert([
+            'username' => $request->felhasználónév,
+            'password' => Hash::make($request->jelszó),
+            'email' => $request->email,
+            'birthday' => $request->születésnap,
+            'tel' => $request->tel,
+            'tax_num' => $request->adószám,
+            'SSN' => $request->tajszám,
+            'bank_account_number' => $request->bankszámlaszám,
+            'role' => $request->jogkör
+        ]);*/
         $employee = new Employee;
         $employee->username = $request->felhasználónév;
         $employee->password = Hash::make($request->jelszó);
@@ -62,7 +76,13 @@ class AdminController extends Controller
         $employee->SSN = $request->tajszám;
         $employee->bank_account_number = $request->bankszámlaszám;
         $employee->role = $request->jogkör;
+
         abort_if(!$employee->save(),500,'Nem sikerült menteni az adatbázisba!');
+
+        $users = new Users;
+        $users->employee_id = Employee::where('username', '=', $request->felhasználónév)->get()[0]->id;
+
+        abort_if(!$users->save(),500,'Nem sikerült menteni az adatbázisba!');
         return redirect('dashboard/admin');
     }
     function updateEmployee(Employee $employees, Request $request)
@@ -136,7 +156,13 @@ class AdminController extends Controller
         $buyers->invoice_zip = $request->invoice_zip;
         $buyers->invoice_city = $request->invoice_city;
         $buyers->invoice_address = $request->invoice_address;
+
         abort_if(!$buyers->save(),500,'Nem sikerült menteni az adatbázisba!');
+
+        $users = new Users;
+        $users->buyer_id = Buyers::where('username', '=', $request->felhasználónév)->get()[0]->id;
+
+        abort_if(!$users->save(),500,'Nem sikerült menteni az adatbázisba!');
         return redirect('/dashboard/admin');
     }
     function updateBuyer(Buyers $buyers, Request $request)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ForgotPasswordMail;
 use App\Models\Buyers;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -90,16 +91,21 @@ class WorkersController extends Controller
             {
                 $buyers->invoice_address = $request->invoice_address;
             }
-            
-            
-            try {
-                if($buyers->save())
-                {
-                    return redirect()->back()->with('siker', 'Sikeres regisztráció, jelentkezz be!');   
-                }
-            } catch (\Throwable $th) {
+            $buyerSave = $buyers->save();
+            abort_if(!$buyerSave,500,'Nem sikerült menteni az adatbázisba!');
+
+            $users = new Users;
+            $users->buyer_id = Buyers::where('username', '=', $request->felhasználónév)->get()[0]->id;
+
+            if($users->save())
+            {
+                return redirect()->back()->with('siker', 'Sikeres regisztráció, jelentkezz be!');  
+            }
+            else
+            {
                 return redirect()->back()->withErrors('Sikertelen regisztráció, próbáld meg újra!');
             }
+
         }
         else if($request->has('login'))
         {
