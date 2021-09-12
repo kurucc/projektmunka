@@ -82,7 +82,7 @@ class ProductsController extends Controller
     }
     function showProductsPage()
     {
-        return view('products');
+        return view('product');
     }
     function showProducts(ProductRequest $request)
     {
@@ -153,5 +153,5 @@ class ProductsController extends Controller
 
         return view('previousOrdersItems', compact('items'));
     }
-    
+
 }

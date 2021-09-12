@@ -30,9 +30,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="search-content">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
-                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                        <form method="get">
+                            <input type="search" name="searchText" id="search" placeholder="Type your keyword...">
+                            <button type="submit"><img src="img/core-img/search.png" alt="">Keresés</button>
                         </form>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
                                         <i class="fa fa-star" aria-hidden="true"></i>
                                     </div>
                                     <div class="cart">
-                                        <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                                        <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src={{ URL::asset('images/core-img/cart.png') }} alt=""></a>
                                     </div>
                                 </div>
                             </div>
