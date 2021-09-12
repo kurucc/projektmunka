@@ -34,7 +34,7 @@ class ProductsController extends Controller
         $productSimilarity = new \App\ProductSimilarity($products);
         $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
         $products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
-        return view('productsUnique', compact('selectedProduct', 'products'));
+        return view('product', compact('selectedProduct', 'products'));
     }
     public function saveToCart($name, $color, Request $request)
     {
@@ -82,7 +82,7 @@ class ProductsController extends Controller
     }
     function showProductsPage()
     {
-        return view('product');
+        return view('products');
     }
     function showProducts(ProductRequest $request)
     {
@@ -136,8 +136,7 @@ class ProductsController extends Controller
             }
         }
         $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
-
-        return view('shop',compact('projects'));
+        return view('shop2',compact('projects'));
     }
     public function getPreviousOrders()
     {
