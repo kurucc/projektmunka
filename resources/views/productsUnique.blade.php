@@ -6,8 +6,8 @@
         }
     </style>
     <div class="container">
-        <div class="row mb-5" style="border-bottom: 1px solid #ccc">
-            <div class="col text-center">
+        <div class="row mb-4" style="border-bottom: 1px solid #ccc">
+            <div class="col col-lg-4 text-center">
                 @foreach ($products as $product)
                 <a href="/?id={{ $product['id'] }}" style="text-decoration: none;"></a>
                 @endforeach
