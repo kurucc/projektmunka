@@ -21,47 +21,6 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
                 <div class="filter-widget">
-                    <h4 class="fw-title">Categories</h4>
-                    <ul class="filter-catagories">
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">Kids</a></li>
-                    </ul>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Brand</h4>
-                    <div class="fw-brand-check">
-                        <div class="bc-item">
-                            <label for="bc-calvin">
-                                Calvin Klein
-                                <input type="checkbox" id="bc-calvin">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bc-item">
-                            <label for="bc-diesel">
-                                Diesel
-                                <input type="checkbox" id="bc-diesel">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bc-item">
-                            <label for="bc-polo">
-                                Polo
-                                <input type="checkbox" id="bc-polo">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="bc-item">
-                            <label for="bc-tommy">
-                                Tommy Hilfiger
-                                <input type="checkbox" id="bc-tommy">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-widget">
                     <h4 class="fw-title">Ár</h4>
                     <div class="filter-range-wrap">
                         <div class="range-slider">
@@ -71,14 +30,50 @@
                             </div>
                         </div>
                         <div
-                            class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                            class="price-range price ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                             data-min="{{$projects->min()->gross_price}}" data-max="{{$projects->max()->gross_price}}">
                             <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                         </div>
                     </div>
-                    <a href="#" class="filter-btn">Szűrés</a>
+
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Vastagság</h4>
+                    <div class="filter-range-wrap">
+                        <div class="range-slider">
+                            <div class="price-input">
+                                <input type="text" id="minThick">
+                                <input type="text" id="maxThick">
+                            </div>
+                        </div>
+                        <div
+                            class="price-range thickness ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                            data-min="{{$projects->min()->thickness}}" data-max="{{$projects->max()->thickness}}">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Szélesség</h4>
+                    <div class="filter-range-wrap">
+                        <div class="range-slider">
+                            <div class="price-input">
+                                <input type="text" id="minWidth">
+                                <input type="text" id="maxWidth">
+                            </div>
+                        </div>
+                        <div
+                            class="price-range width ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                            data-min="{{$projects->min()->width}}" data-max="{{$projects->max()->width}}">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="filter-widget">
                     <h4 class="fw-title">Szín</h4>
@@ -108,39 +103,7 @@
                             <label class="cs-green" for="cs-green">Zöld</label>
                         </div>
                     </div>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Size</h4>
-                    <div class="fw-size-choose">
-                        <div class="sc-item">
-                            <input type="radio" id="s-size">
-                            <label for="s-size">s</label>
-                        </div>
-                        <div class="sc-item">
-                            <input type="radio" id="m-size">
-                            <label for="m-size">m</label>
-                        </div>
-                        <div class="sc-item">
-                            <input type="radio" id="l-size">
-                            <label for="l-size">l</label>
-                        </div>
-                        <div class="sc-item">
-                            <input type="radio" id="xs-size">
-                            <label for="xs-size">xs</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Tags</h4>
-                    <div class="fw-tags">
-                        <a href="#">Towel</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Coat</a>
-                        <a href="#">Dresses</a>
-                        <a href="#">Trousers</a>
-                        <a href="#">Men's hats</a>
-                        <a href="#">Backpack</a>
-                    </div>
+                    <a href="#" class="filter-btn">Szűrés</a>
                 </div>
             </div>
             <div class="col-lg-9 order-1 order-lg-2">

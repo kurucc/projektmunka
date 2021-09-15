@@ -119,7 +119,7 @@
 		}
         $this.btn = $(
             ['<' + settings.parentTag + ' aria-haspopup="true" role="button" tabindex="0" class="' + prefix + '_btn ' + prefix + '_collapsed">',
-                '<span class="' + prefix + '_menutxt">' + settings.label + '</span>',
+                '<span class="' + prefix + '_menutxt"></span>',
                 '<span class="' + iconClass + '">',
                     '<span class="' + prefix + '_icon-bar"></span>',
                     '<span class="' + prefix + '_icon-bar"></span>',
@@ -269,12 +269,12 @@
                     if (ev.keyCode !== Keyboard.DOWN || !$($this.btn).hasClass(prefix+'_open')){
                         $this._menuToggle();
                     }
-                    
+
                     $($this.btn).next().find('[role="menuitem"]').first().focus();
                     break;
             }
 
-            
+
         });
 
         $this.mobileNav.on('keydown', '.'+prefix+'_item', function(e) {
@@ -332,7 +332,7 @@
                     e.preventDefault();
                     $this._menuToggle();
                     $($this.btn).focus();
-                    break;    
+                    break;
             }
         });
 
@@ -402,7 +402,7 @@
         if (animate) {
             duration = settings.duration;
         }
-        
+
         function afterOpen(trigger, parent) {
             $(trigger).removeClass(prefix+'_animating');
             $(parent).removeClass(prefix+'_animating');
@@ -412,7 +412,7 @@
                 settings.afterOpen(trigger);
             }
         }
-        
+
         function afterClose(trigger, parent) {
             el.attr('aria-hidden','true');
             items.attr('tabindex', '-1');
@@ -465,7 +465,7 @@
                     afterClose(trigger, parent)
                 });
             } else if (settings.animations === 'velocity') {
-                
+
                 el.velocity("finish").velocity("slideUp", {
                     duration: duration,
                     easing: settings.easingClose,

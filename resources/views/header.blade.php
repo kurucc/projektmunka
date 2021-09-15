@@ -113,7 +113,7 @@
             </div>
         </div>
     </div>
-    <div class="nav-item">
+    <div class="nav-item text-center">
         <div class="container">
             <nav class="nav-menu mobile-menu">
                 <ul>
