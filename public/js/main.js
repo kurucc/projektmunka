@@ -216,6 +216,23 @@
     minThick.val('$' + rangeSliderThick.slider("values", 0));
     maxThick.val('$' + rangeSliderThick.slider("values", 1));
 
+    var rangeSliderWidth = $(".width"),
+        minWidth = $("#minWidth"),
+        maxWidth = $("#maxWidth"),
+        minW = rangeSliderWidth.data('min'),
+        maxW = rangeSliderWidth.data('max');
+    rangeSliderWidth.slider({
+        range: true,
+        min: minW,
+        max: maxW,
+        values: [minW, maxW],
+        slide: function (event, ui) {
+            minWidth.val('$' + ui.values[0]);
+            maxWidth.val('$' + ui.values[1]);
+        }
+    });
+    minWidth.val('$' + rangeSliderWidth.slider("values", 0));
+    maxWidth.val('$' + rangeSliderWidth.slider("values", 1));
 
 
 

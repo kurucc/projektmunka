@@ -31,7 +31,7 @@
                         </div>
                         <div
                             class="price-range price ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="{{$projects->min()->gross_price}}" data-max="{{$projects->max()->gross_price}}">
+                            data-min="{{$projects->min('gross_price')}}" data-max="{{$projects->max('gross_price')}}">
                             <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -50,7 +50,7 @@
                         </div>
                         <div
                             class="price-range thickness ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="{{$projects->min()->thickness}}" data-max="{{$projects->max()->thickness}}">
+                            data-min="{{$projects->min('thickness')}}" data-max="{{$projects->max('thickness')}}">
                             <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -68,7 +68,7 @@
                         </div>
                         <div
                             class="price-range width ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="{{$projects->min()->width}}" data-max="{{$projects->max()->width}}">
+                            data-min="{{$projects->min('width')}}" data-max="{{$projects->max('width')}}">
                             <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
