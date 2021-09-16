@@ -18,94 +18,97 @@
 <!-- Product Shop Section Begin -->
 <section class="product-shop spad">
     <div class="container">
+        <form>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-                <div class="filter-widget">
-                    <h4 class="fw-title">Ár</h4>
-                    <div class="filter-range-wrap">
-                        <div class="range-slider">
-                            <div class="price-input">
-                                <input type="text" id="minamount">
-                                <input type="text" id="maxamount">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Ár</h4>
+                        <div class="filter-range-wrap">
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <input type="text" id="minamount" name="priceFrom">
+                                    <input type="text" id="maxamount" name="priceTo">
+                                </div>
+                            </div>
+                            <div
+                                class="price-range price ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                data-min="{{$projects->min('gross_price')}}"
+                                data-max="{{$projects->max('gross_price')}}">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <div
-                            class="price-range price ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="{{$projects->min('gross_price')}}" data-max="{{$projects->max('gross_price')}}">
-                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Vastagság</h4>
-                    <div class="filter-range-wrap">
-                        <div class="range-slider">
-                            <div class="price-input">
-                                <input type="text" id="minThick">
-                                <input type="text" id="maxThick">
+                    </div>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Vastagság</h4>
+                        <div class="filter-range-wrap">
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <input type="text" id="minThick">
+                                    <input type="text" id="maxThick">
+                                </div>
+                            </div>
+                            <div
+                                class="price-range thickness ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                data-min="{{$projects->min('thickness')}}" data-max="{{$projects->max('thickness')}}">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <div
-                            class="price-range thickness ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="{{$projects->min('thickness')}}" data-max="{{$projects->max('thickness')}}">
-                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                        </div>
                     </div>
-                </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Szélesség</h4>
-                    <div class="filter-range-wrap">
-                        <div class="range-slider">
-                            <div class="price-input">
-                                <input type="text" id="minWidth">
-                                <input type="text" id="maxWidth">
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Szélesség</h4>
+                        <div class="filter-range-wrap">
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <input type="text" id="minWidth">
+                                    <input type="text" id="maxWidth">
+                                </div>
+                            </div>
+                            <div
+                                class="price-range width ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                data-min="{{$projects->min('width')}}" data-max="{{$projects->max('width')}}">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                         </div>
-                        <div
-                            class="price-range width ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                            data-min="{{$projects->min('width')}}" data-max="{{$projects->max('width')}}">
-                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                    </div>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Szín</h4>
+                        <div class="fw-color-choose">
+                            <div class="cs-item">
+                                <input type="radio" id="cs-black">
+                                <label class="cs-black" for="cs-black">Fekete</label>
+                            </div>
+                            <div class="cs-item">
+                                <input type="radio" id="cs-violet">
+                                <label class="cs-violet" for="cs-violet">Lila</label>
+                            </div>
+                            <div class="cs-item">
+                                <input type="radio" id="cs-blue">
+                                <label class="cs-blue" for="cs-blue">Kék</label>
+                            </div>
+                            <div class="cs-item">
+                                <input type="radio" id="cs-yellow">
+                                <label class="cs-yellow" for="cs-yellow">Sárga</label>
+                            </div>
+                            <div class="cs-item">
+                                <input type="radio" id="cs-red">
+                                <label class="cs-red" for="cs-red">Piros</label>
+                            </div>
+                            <div class="cs-item">
+                                <input type="radio" id="cs-green">
+                                <label class="cs-green" for="cs-green">Zöld</label>
+                            </div>
                         </div>
+                        <input type="submit" value="Szűrés">
                     </div>
                 </div>
-                <div class="filter-widget">
-                    <h4 class="fw-title">Szín</h4>
-                    <div class="fw-color-choose">
-                        <div class="cs-item">
-                            <input type="radio" id="cs-black">
-                            <label class="cs-black" for="cs-black">Fekete</label>
-                        </div>
-                        <div class="cs-item">
-                            <input type="radio" id="cs-violet">
-                            <label class="cs-violet" for="cs-violet">Lila</label>
-                        </div>
-                        <div class="cs-item">
-                            <input type="radio" id="cs-blue">
-                            <label class="cs-blue" for="cs-blue">Kék</label>
-                        </div>
-                        <div class="cs-item">
-                            <input type="radio" id="cs-yellow">
-                            <label class="cs-yellow" for="cs-yellow">Sárga</label>
-                        </div>
-                        <div class="cs-item">
-                            <input type="radio" id="cs-red">
-                            <label class="cs-red" for="cs-red">Piros</label>
-                        </div>
-                        <div class="cs-item">
-                            <input type="radio" id="cs-green">
-                            <label class="cs-green" for="cs-green">Zöld</label>
-                        </div>
-                    </div>
-                    <a href="#" class="filter-btn">Szűrés</a>
-                </div>
-            </div>
+            </form>
             <div class="col-lg-9 order-1 order-lg-2">
                 <div class="product-show-option">
                     <div class="row">
