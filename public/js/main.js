@@ -203,7 +203,7 @@
         maxThick = $("#maxThick"),
         minT = rangeSliderThick.data('min'),
         maxT = rangeSliderThick.data('max');
-    rangeSliderThick.slider({
+    rangeSlider.slider({
         range: true,
         min: minT,
         max: maxT,
@@ -213,6 +213,7 @@
             maxThick.val('$' + ui.values[1]);
         }
     });
+    console.log(minThick.val('$' + rangeSliderThick.slider("values", 0)));
     minThick.val('$' + rangeSliderThick.slider("values", 0));
     maxThick.val('$' + rangeSliderThick.slider("values", 1));
 
