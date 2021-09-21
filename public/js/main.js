@@ -196,9 +196,43 @@
 	minamount.val(rangeSlider.slider("values", 0));
     maxamount.val(rangeSlider.slider("values", 1));
 
-
-
     var rangeSliderThick = $(".thickness"),
+        minthick = $("#minThick"),
+        maxthick = $("#maxThick"),
+        minThick = rangeSliderThick.data('thickmin'),
+        maxThick = rangeSliderThick.data('thickmax');
+    rangeSliderThick.slider({
+        range: true,
+        min: minThick,
+        max: maxThick,
+        values: [minThick, maxThick],
+        slide: function (event, ui) {
+            minthick.val(ui.values[0]);
+            maxthick.val(ui.values[1]);
+        }
+    });
+    minthick.val(rangeSliderThick.slider("values", 0));
+    maxthick.val(rangeSliderThick.slider("values", 1));
+
+    var rangeSliderWidth = $(".width"),
+        minWidth = $("#minWidth"),
+        maxWidth = $("#maxWidth"),
+        minW = rangeSliderWidth.data('minwidth'),
+        maxW = rangeSliderWidth.data('maxwidth');
+    rangeSliderWidth.slider({
+        range: true,
+        min: minW,
+        max: maxW,
+        values: [minW, maxW],
+        slide: function (event, ui) {
+            minWidth.val(ui.values[0]);
+            maxWidth.val(ui.values[1]);
+        }
+    });
+    minWidth.val(rangeSliderWidth.slider("values", 0));
+    maxWidth.val(rangeSliderWidth.slider("values", 1));
+
+    /*var rangeSliderThick = $(".thickness"),
         minThick = $("#minThick"),
         maxThick = $("#maxThick"),
         minT = rangeSliderThick.data('min'),
@@ -233,7 +267,7 @@
         }
     });
     minWidth.val('$' + rangeSliderWidth.slider("values", 0));
-    maxWidth.val('$' + rangeSliderWidth.slider("values", 1));
+    maxWidth.val('$' + rangeSliderWidth.slider("values", 1));*/
 
 
 

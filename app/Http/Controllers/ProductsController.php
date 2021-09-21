@@ -34,7 +34,7 @@ class ProductsController extends Controller
         $productSimilarity = new \App\ProductSimilarity($products);
         $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
         $products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
-        return view('product', compact('selectedProduct', 'products'));
+        return view('product-details', compact('selectedProduct', 'products'));
     }
     public function saveToCart($name, $color, Request $request)
     {
@@ -99,7 +99,21 @@ class ProductsController extends Controller
         $sale = $request->get('sale');
         $color = $request->get('color');
 
+        //TODO az url csak localba jó így
         $query = Products::query()->where('type', '=', explode('http://127.0.0.1:8000/products/',URL::current())[1]);
+
+        //összes különböző szín lekérdezése
+        $colors = json_decode($query->distinct()->get('color'), true);
+
+        $priceMin = json_decode(floor($query->min('gross_price')), true);
+        $priceMax = json_decode(round($query->max('gross_price')), true);
+
+        $widthMin = json_decode(floor($query->min('width')), true);
+        $widthMax = json_decode(round($query->max('width')), true);
+
+        $thicknessMin = json_decode(floor($query->min('thickness')), true);
+        $thicknessMax = json_decode(round($query->max('thickness')), true);
+
         if(!empty($searchText)) {
             $query->where(function($query) use($searchText){
                 $query->where('name','like', '%'.$searchText . '%');
@@ -118,15 +132,15 @@ class ProductsController extends Controller
         if(!empty($sale)) {
             $query->where('sale', '<>', 'NULL');
         }
+        //return $color;
         if(!empty($color)) {
-            $array = explode(',',$color);
 
-            if(count($array) > 1)
+            if(count($color) > 1)
             {
-                $query->where(function($query) use($array){
-                    $query->where('color', '=', $array[0]);
-                    for ($i=1; $i < count($array); $i++) {
-                        $query->orWhere('color', '=', $array[$i]);
+                $query->where(function($query) use($color){
+                    $query->where('color', '=', $color[0]);
+                    for ($i=1; $i < count($color); $i++) {
+                        $query->orWhere('color', '=', $color[$i]);
                     }
                 });
             }
@@ -136,7 +150,7 @@ class ProductsController extends Controller
             }
         }
         $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
-        return view('shop2',compact('projects'));
+        return view('shop2',compact('projects', 'colors', 'priceMin', 'priceMax', 'widthMin', 'widthMax', 'thicknessMin', 'thicknessMax'));
     }
     public function getPreviousOrders()
     {
