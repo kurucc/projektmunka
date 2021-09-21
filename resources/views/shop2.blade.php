@@ -140,6 +140,7 @@
                         </div>
                     @endforeach
                 </div>
+                {{--TODO paginator classre justify-content-center-t rakni, hogy középen legyen--}}
                 {{ $projects->appends(request()->query())->links() }}
             </div>
         </div>
