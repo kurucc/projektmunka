@@ -92,6 +92,18 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Akciós</h4>
                         <input type="checkbox" name="sale"><br>
+                    </div>
+                    <div class="filter-widget">
+                        <h4 class="fw-title">Szűrés</h4>
+                        <select name="orderBy">
+                            <option value="desc">Csökkenő</option>
+                            <option value="asc">Növekvő</option>
+                        </select><br>
+                        <select name="sortBy">
+                            <option value="name">Név szerint</option>
+                            <option value="gross_price">Ár szerint</option>
+                        </select><br>
+                        <input type="text" placeholder="Termékek keresése..." name="searchText">
                         <input type="submit" value="Szűrés">
                     </div>
                 </div>
@@ -108,8 +120,9 @@
                                         <div class="sale pp-sale">Leárazás - {{ $project->sale . '%'}}</div>
                                     @endif
                                     <ul>
+                                        {{--TODO cart-ba rakás megcsinálása vagy kivétele--}}
                                         <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                        <li class="quick-view"><a href="#">+ Megnézem</a></li>
+                                        <li class="quick-view"><a href="{{ url('products/' . $project->type . '/' . $project->name . '/' . $project->color) }}">+ Megnézem</a></li>
                                     </ul>
                                 </div>
                                 <div class="pi-text">
