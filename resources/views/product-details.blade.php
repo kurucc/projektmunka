@@ -57,11 +57,12 @@
                         </div>
 
                         <div class="short_overview my-5">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
+                            <p>{{ $selectedProduct[0]->description }}</p>
                         </div>
 
                         <!-- Add to Cart Form -->
                         <form class="cart clearfix" method="post">
+                            @csrf
                             <div class="cart-btn d-flex mb-50">
                                 <p>Qty</p>
                                 <div class="quantity">
