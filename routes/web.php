@@ -51,7 +51,7 @@ Route::get('dashboard/prevorders/{orderId}', [ProductsController::class,'getPrev
 
 
 Route::middleware(['whitelist'])->group(function () {
-    
+
     Route::get('workerLogin', [WorkersController::class,'showWorkersLogin']);
     Route::post('workerLogin', [WorkersController::class, 'workersLogin']);
 });

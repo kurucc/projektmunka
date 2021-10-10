@@ -67,11 +67,11 @@
                                 <p>Qty</p>
                                 <div class="quantity">
                                     <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="mennyiség" value="1">
                                     <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                                 </div>
                             </div>
-                            <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                            <button type="submit" name="addtocart" value="5" class="btn amado-btn">Kosárba</button>
                         </form>
 
                     </div>
@@ -81,4 +81,18 @@
     </div>
     <!-- Product Details Area End -->
 </div>
+@foreach ($products as $product)
+    <div class="row mb-5">
+        <div class="offset-3 col-6">
+            <div class="card">
+                <div class="text-center" style="background-color: #ccc">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Similarity: {{ round($product['similarity'] * 100, 1) }}%</h5>
+                    <a href={{ url('products/' . $product['type'] . '/' . $product['name'] . '/' . $product['color']) }}><p class="card-text text-muted">{{ $product['name'] }} {{ $product['color'] }} (${{ $product['gross_price'] }})</p></a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 @include('footer')

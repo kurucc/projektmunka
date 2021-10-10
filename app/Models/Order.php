@@ -11,7 +11,7 @@ class Order extends Model
     protected $table = 'orders';
     protected $primaryKey = 'id';
     public $fillable = [
-        'order_number', 
+        'order_number',
         'user_id',
         'direction',
         'net_sum',
