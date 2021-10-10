@@ -291,4 +291,6 @@
         </div>
       </div>
     </div>
+
+<script src="{{ URL::asset('js/login.js') }}"></script>
 @include('footer')

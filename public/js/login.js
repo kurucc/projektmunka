@@ -5,12 +5,12 @@ function dataEquals()
     var company = document.getElementsByClassName('companyreq');
     var person = document.getElementsByClassName('personreq');
 
-        if(document.getElementById('megegyeznek').checked == true)
+        if(document.getElementById('megegyeznek').checked === true)
         {
             for (let i = 0; i < szallitas.length; i++) {
                 szallitas[i].removeAttribute('required');
                 szallitas[i].value = "";
-                
+
             }
             for (let i = 0; i < maganszemely.length; i++) {
                 maganszemely[i].style.display = 'none';
@@ -28,15 +28,15 @@ function dataEquals()
         {
             for (let i = 0; i < szallitas.length; i++) {
                 szallitas[i].setAttribute('required', true);
-                
+
             }
             for (let i = 0; i < maganszemely.length; i++) {
                 maganszemely[i].style.display = '';
-                
+
             }
             for (let i = 0; i < person.length; i++) {
                 person[i].setAttribute('required', true);
-                
+
             }
             document.getElementById('individual').checked = true;
             document.getElementById('person').style.display = "";
@@ -49,18 +49,18 @@ function isIndividual()
         var company = document.getElementsByClassName('companyreq');
         var person = document.getElementsByClassName('personreq');
 
-        if(document.getElementById('individual').checked == true)
+        if(document.getElementById('individual').checked === true)
         {
             document.getElementById('person').style.display = "";
             document.getElementById('company').style.display = "none";
             for (let i = 0; i < company.length; i++) {
                 company[i].removeAttribute('required');
                 company[i].value = "";
-                
+
             }
             for (let i = 0; i < person.length; i++) {
                 person[i].setAttribute('required', true);
-                
+
             }
         }
         else
@@ -69,12 +69,12 @@ function isIndividual()
             document.getElementById('company').style.display = "";
             for (let i = 0; i < company.length; i++) {
                 company[i].setAttribute('required', true);
-                
+
             }
             for (let i = 0; i < person.length; i++) {
                 person[i].removeAttribute('required');
                 person[i].value = "";
-                
+
             }
         }
 }
