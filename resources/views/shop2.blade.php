@@ -26,8 +26,9 @@
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
+
                                     <input type="text" id="minamount" name="priceFrom">
-                                    <input type="text" id="maxamount" name="priceTo">
+                                   <input type="text" id="maxamount" name="priceTo"> <label>Ft</label>
                                 </div>
                             </div>
                             <div
@@ -45,13 +46,13 @@
                         <h4 class="fw-title">Vastagság</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
-                                <div class="price-input">
+                                <div class="thick-width-input">
                                     <input type="text" id="minThick" name="thicknessFrom">
-                                    <input type="text" id="maxThick" name="thicknessTo">
+                                    <input type="text" id="maxThick" name="thicknessTo"> <label>mm</label>
                                 </div>
                             </div>
                             <div
-                                class="price-range thickness ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                class="thick-width-range thickness ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                 data-thickmin="{{$thicknessMin}}"
                                 data-thickmax="{{$thicknessMax}}">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
@@ -64,13 +65,13 @@
                         <h4 class="fw-title">Szélesség</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
-                                <div class="price-input">
+                                <div class="thick-width-input">
                                     <input type="text" id="minWidth" name="widthFrom">
-                                    <input type="text" id="maxWidth" name="widthTo">
+                                    <input type="text" id="maxWidth" name="widthTo"> <label>mm</label>
                                 </div>
                             </div>
                             <div
-                                class="price-range width ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                class="thick-width-range width ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                 data-minwidth="{{$widthMin}}"
                                 data-maxwidth="{{$widthMax}}">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
@@ -82,29 +83,24 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Szín</h4>
                         <div class="fw-color-choose">
-                            <select multiple="multiple" name="color[]">
                                 @foreach($colors as $color)
-                                    <option>{{$color['color']}}</option>
+                                    <input type="checkbox" name={{$color['color']}}/> <label style="margin-bottom: 5px">{{$color['color']}} </label>
                                 @endforeach
-                            </select>
                         </div>
                     </div>
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Akciós</h4>
-                        <input type="checkbox" name="sale"><br>
+                    <div class="filter-widget sale align-items-center">
+                        <div class="fw-title"> <h4 class="sale-h4">Akciós <input type="checkbox" name="sale"></h4 >  </div>
                     </div>
                     <div class="filter-widget">
                         <h4 class="fw-title">Szűrés</h4>
-                        <select name="orderBy">
-                            <option value="desc">Csökkenő</option>
-                            <option value="asc">Növekvő</option>
+                        <select class="form-control" name="sortBy">
+                            <option value="name_asc" selected>Név szerint növekvő (A-Z)</option>
+                            <option value="name_desc">Név szerint csökkenő (Z-A)</option>
+                            <option value="gross_price_asc">Ár szerint növekvő</option>
+                            <option value="gross_price_desc">Ár szerint csökkenő</option>
                         </select><br>
-                        <select name="sortBy">
-                            <option value="name">Név szerint</option>
-                            <option value="gross_price">Ár szerint</option>
-                        </select><br>
-                        <input type="text" placeholder="Termékek keresése..." name="searchText">
-                        <input type="submit" value="Szűrés">
+                        <input type="text" class="form-control" placeholder="Termékek keresése..." name="searchText">
+                        <button type="submit" class="btn mt-3 filter-btn" id="filter">Szűrés</button>
                     </div>
                 </div>
         </form>
@@ -140,8 +136,10 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="row justify-content-center paginator">
                 {{--TODO paginator classre justify-content-center-t rakni, hogy középen legyen--}}
                 {{ $projects->appends(request()->query())->links() }}
+                </div>
             </div>
         </div>
     </div>

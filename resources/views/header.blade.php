@@ -47,7 +47,7 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="{{ url('/') }}">
-                            <img src="{{ URL::asset('img/logo.png') }}" alt="" style="width: 90px;">
+                            <img src="{{ URL::asset('img/logo_dark.png') }}" alt="" style="width: 90px;">
                         </a>
                     </div>
                 </div>

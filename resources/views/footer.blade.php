@@ -4,7 +4,7 @@
             <div class="col-lg-3">
                 <div class="footer-left">
                     <div class="footer-logo">
-                        <a href="{{ url('/') }}"><img src="{{ URL::asset('img/logo.png') }}" alt=""></a>
+                        <a href="{{ url('/') }}"><img src="{{ URL::asset('img/logo_white.png') }}" alt=""></a>
                     </div>
                     <ul>
                         <li>Cím: 9023 Győr, Teszt utca 123</li>
@@ -39,7 +39,7 @@
                     <p>Tudd meg elsőként a legújabb akcióinkat és ajánlatainkat.</p>
                     <form action="#" class="subscribe-form">
                         <input type="text" placeholder="E-mail...">
-                        <button type="button">Feliratkozás</button>
+                        <button class="btn" type="button">Feliratkozás</button>
                     </form>
                 </div>
             </div>
@@ -51,9 +51,6 @@
                 <div class="col-lg-12">
                     <div class="copyright-text">
                         Minden jog fenntartva &copy; 2021 | Burkologic
-                    </div>
-                    <div class="payment-pic">
-                        <img src="{{ URL::asset('img/payment-method.png') }}" alt="">
                     </div>
                 </div>
             </div>
