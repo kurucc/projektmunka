@@ -93,12 +93,10 @@
                         <h1>Black friday</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore</p>
-                        <a href="#" class="primary-btn">Shop Now</a>
+                        <a href="#" class="btn primary-btn">Shop Now</a>
                     </div>
                 </div>
-                <div class="off-card">
-                    <h2>Sale <span>50%</span></h2>
-                </div>
+
             </div>
         </div>
         <div class="single-hero-items set-bg" data-setbg="img/hero-2.jpg">
@@ -109,11 +107,8 @@
                         <h1>Black friday</h1>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore</p>
-                        <a href="#" class="primary-btn">Shop Now</a>
+                        <a href="#" class="btn primary-btn">Shop Now</a>
                     </div>
-                </div>
-                <div class="off-card">
-                    <h2>Sale <span>50%</span></h2>
                 </div>
             </div>
         </div>
@@ -191,7 +186,5 @@
         </div>
     </div>
 </div>
-<!-- Instagram Section End -->
-
 <!-- Footer Section Begin -->
 @include('footer')
