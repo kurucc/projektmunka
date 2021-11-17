@@ -1,3 +1,5 @@
+isIndividual();
+
 function dataEquals()
 {
     var maganszemely = document.getElementsByClassName('maganszemely');
