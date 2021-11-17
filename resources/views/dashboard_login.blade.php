@@ -206,10 +206,7 @@
 </div>
 </div>
 @include('footer')
-
+<script src="{{ URL::asset('js/login.js') }}"></script>
 @if (Auth::guard('employee')->check() && Auth::guard('employee')->user()->role === 'admin')
     <a href={{ url('dashboard/admin') }}>Admin</a>
 @endif
-
-@include('footer')
-@include('footer')
