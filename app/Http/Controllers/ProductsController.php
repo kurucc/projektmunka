@@ -89,7 +89,7 @@ class ProductsController extends Controller
         $searchText = $request->get('searchText');
         $pageSize = $request->get('pageSize', 15);
         $sortBy = $request->get('sortBy','name');
-        $orderBy = $request->get('orderBy','asc');
+        $orderBy = 'asc';
         $priceFrom = $request->get('priceFrom');
         $priceTo = $request->get('priceTo');
         $widthFrom = $request->get('widthFrom');
@@ -132,7 +132,7 @@ class ProductsController extends Controller
         if(!empty($sale)) {
             $query->where('sale', '<>', 'NULL');
         }
-        //return $color;
+
         if(!empty($color)) {
 
             if(count($color) > 1)
@@ -148,6 +148,19 @@ class ProductsController extends Controller
             {
                 $query->where('color', '=', $color);
             }
+        }
+        if($sortBy == 'name_asc') {
+            $sortBy = 'name';
+            $orderBy = 'asc';
+        } else if($sortBy == 'name_desc') {
+            $sortBy = 'name';
+            $orderBy = 'desc';
+        } else if($sortBy == 'gross_price_asc') {
+            $sortBy = 'gross_price';
+            $orderBy = 'asc';
+        } else if($sortBy == 'gross_price_desc') {
+            $sortBy = 'gross_price';
+            $orderBy = 'desc';
         }
         $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
         return view('shop2',compact('projects', 'colors', 'priceMin', 'priceMax', 'widthMin', 'widthMax', 'thicknessMin', 'thicknessMax'));

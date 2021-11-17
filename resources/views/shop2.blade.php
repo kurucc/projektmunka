@@ -18,7 +18,7 @@
 <!-- Product Shop Section Begin -->
 <section class="product-shop spad">
     <div class="container">
-        <form>
+        <form method="GET" action="{{ url()->current() }}">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
                     <div class="filter-widget">
@@ -100,10 +100,9 @@
                             <option value="gross_price_desc">Ár szerint csökkenő</option>
                         </select><br>
                         <input type="text" class="form-control" placeholder="Termékek keresése..." name="searchText">
-                        <button type="submit" class="btn mt-3 filter-btn" id="filter">Szűrés</button>
+                        <input type="submit" class="btn mt-3 filter-btn" value="Szűrés">
                     </div>
                 </div>
-        </form>
         <div class="col-lg-9 order-1 order-lg-2">
             <div class="product-list">
                 <div class="row">

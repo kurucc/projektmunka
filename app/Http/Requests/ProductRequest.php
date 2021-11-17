@@ -26,8 +26,7 @@ class ProductRequest extends FormRequest
         return [
             'searchText' => 'nullable|string',
             'pageSize' => 'nullable|integer',
-            'sortBy' => 'nullable|string|in:name,gross_price',
-            'orderBy' => 'nullable|string|in:asc,desc'
+            'sortBy' => 'nullable|string|in:name_asc,name_desc,gross_price_asc,gross_price_desc',
         ];
     }
 }
