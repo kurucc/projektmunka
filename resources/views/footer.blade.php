@@ -28,7 +28,7 @@
                     <ul>
                         <li><a href="{{ url('products/csempe') }}">Csempék</a></li>
                         <li><a href="{{ url('products/parketta') }}">Parketták</a></li>
-                        <li><a href="{{ url('technician') }}">Szakember kereső</a></li>
+                        <li><a href="{{ url('technicians') }}">Szakember kereső</a></li>
                         <li><a href="{{ url('cart') }}">Kosár</a></li>
                     </ul>
                 </div>

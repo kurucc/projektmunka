@@ -1,7 +1,7 @@
 @include('header')
 <div class="background">
 <div class="container d-flex alig-items-center py-3">
-<h2>Helló USERNAME!</h2>
+<h2>Üdv!</h2>
 <button type="submit" class="btn btn-light logout-btn mx-5"> <a class="logout" href={{ url('logout') }}>Logout</a> </button>
 </div>
 <div class="container">

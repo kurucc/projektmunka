@@ -37,7 +37,11 @@
                 </div>
             </div>
             <div class="ht-right">
-                <a href="{{ url('auth') }}" class="login-panel"><i class="fa fa-user"></i>Bejelentkezés</a>
+                @if(!Auth::guard('employee')->check() && !Auth::guard('buyer')->check())
+                    <a href="{{ url('auth') }}" class="login-panel"><i class="fa fa-user"></i>Bejelentkezés</a>
+                @else
+                    <a href="{{ url('dashboard') }}" class="login-panel"><i class="fa fa-user"></i>Vezérlőpult</a>
+                @endif
             </div>
         </div>
     </div>
@@ -51,6 +55,7 @@
                         </a>
                     </div>
                 </div>
+                @if(Auth::guard('buyer')->check())
                 <div class="col-lg-6 text-right col-md-6 float-right">
                     <ul class="nav-right">
                         <li class="cart-icon">
@@ -86,6 +91,7 @@
                             </div>
                     </ul>
                 </div>
+                @endif
             </div>
         </div>
     </div>
