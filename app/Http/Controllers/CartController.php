@@ -8,6 +8,7 @@ use App\Models\Item;
 use App\Models\Order;
 use App\Models\Products;
 use App\Models\Users;
+use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -23,13 +24,14 @@ class CartController extends Controller
         {
             return redirect('auth');
         }
-        $items = \Cart::session(Auth::guard('buyer')->id())->getContent();
+        $items = Cart::session(Auth::guard('buyer')->id())->getContent();
+
         return view('cart', compact('items'));
     }
     public function orderUniqueProducts(Request $request)
     {
         if($request->has('order')) {
-            foreach (\Cart::session(Auth::guard('buyer')->id())->getContent() as $item) 
+            foreach (Cart::session(Auth::guard('buyer')->id())->getContent() as $item)
             {
                 $product = Products::where('name', '=', $item->associatedModel->name)->where('color', '=', $item->associatedModel->color)->get()[0]['actual_stock'];
                 if($product <= 0){
@@ -41,16 +43,16 @@ class CartController extends Controller
                 }
             }
 
-            $items = \Cart::session(Auth::guard('buyer')->id())->getContent();
-            $total_gross = \Cart::session(Auth::guard('buyer')->id())->getTotal();
-            $total_net = \Cart::session(Auth::guard('buyer')->id())->getTotal() / 1.27;
+            $items = Cart::session(Auth::guard('buyer')->id())->getContent();
+            $total_gross = Cart::session(Auth::guard('buyer')->id())->getTotal();
+            $total_net = Cart::session(Auth::guard('buyer')->id())->getTotal() / 1.27;
             $invoice = Invoice::create(['invoice_number' => rand(111111,999999), 'billed' => 0]);
             $orders = Order::create([
             'order_number' => $invoice->id,
             'user_id' => Users::where('buyer_id' , '=', Auth::guard('buyer')->user()->id)->get()[0]['id'],
             'direction' => 0,
-            'net_sum' => \Cart::session(Auth::guard('buyer')->id())->getTotal() / 1.27,
-            'gross_sum' => \Cart::session(Auth::guard('buyer')->id())->getTotal(),
+            'net_sum' => Cart::session(Auth::guard('buyer')->id())->getTotal() / 1.27,
+            'gross_sum' => Cart::session(Auth::guard('buyer')->id())->getTotal(),
             'VAT_sum' => 27,
             'delivered' => 0,
             'invoice_id' => $invoice->id
@@ -67,7 +69,7 @@ class CartController extends Controller
                 ->get()[0]['actual_stock'] -= $item->quantity;
 
                 DB::update('update products set actual_stock = ' . $currentQuantity . ' where name = ? and color = ?', [$item->associatedModel->name, $item->associatedModel->color]);
-                \Cart::session(Auth::guard('buyer')->id())->remove($item->id);
+                Cart::session(Auth::guard('buyer')->id())->remove($item->id);
             }
 
             Mail::to(Auth::guard('buyer')->user()->email)->send(new OrderMail(['name' => Auth::guard('buyer')->user()->username, 'items' => $items,
@@ -77,24 +79,24 @@ class CartController extends Controller
         }
         else if($request->has('delete'))
         {
-            \Cart::session(Auth::guard('buyer')->id())->remove($request->id);
+            Cart::session(Auth::guard('buyer')->id())->remove($request->id);
         }
     }
     public function removeProduct($id)
     {
-        \Cart::session(Auth::guard('buyer')->id())->remove($id);
+        Cart::session(Auth::guard('buyer')->id())->remove($id);
         return redirect()->back();
     }
     public function updateProductQuantity($id)
     {
-        \Cart::session(Auth::guard('buyer')->id())->update($id,[
+        Cart::session(Auth::guard('buyer')->id())->update($id,[
             'quantity' => 1,
         ]);
         return redirect()->back();
     }
     public function minusProductQuantity($id)
     {
-        \Cart::session(Auth::guard('buyer')->id())->update($id,[
+        Cart::session(Auth::guard('buyer')->id())->update($id,[
             'quantity' => -1,
         ]);
         return redirect()->back();

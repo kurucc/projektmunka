@@ -56,42 +56,27 @@
                         <li class="cart-icon">
                             <a href="#">
                                 <i class="icon_bag_alt"></i>
-                                <span>3</span>
+                                <span>{{\Cart::session(Auth::guard('buyer')->id())->getTotalQuantity()}}</span>
                             </a>
                             <div class="cart-hover">
                                 <div class="select-items">
                                     <table>
-                                        <tbody>
-                                        <tr>
-                                            <td class="si-pic"><img src="{{ URL::asset('img/select-product-1.jpg') }}" alt=""></td>
+                                        @foreach(\Cart::session(Auth::guard('buyer')->id())->getContent() as $row)
+                                            <tr>
+                                                <td class="si-pic"><img src="{{ URL::asset($row->picture_path) }}" alt=""></td>
+                                            </tr>
                                             <td class="si-text">
                                                 <div class="product-selected">
-                                                    <p>$60.00 x 1</p>
-                                                    <h6>Kabino Bedside Table</h6>
+                                                    <p>{{ $row->price }} Ft x {{ $row->quantity }}</p>
+                                                    <h6>{{ $row->name }}</h6>
                                                 </div>
                                             </td>
-                                            <td class="si-close">
-                                                <i class="ti-close"></i>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="si-pic"><img src="{{ URL::asset('img/select-product-2.jpg') }}" alt=""></td>
-                                            <td class="si-text">
-                                                <div class="product-selected">
-                                                    <p>$60.00 x 1</p>
-                                                    <h6>Kabino Bedside Table</h6>
-                                                </div>
-                                            </td>
-                                            <td class="si-close">
-                                                <i class="ti-close"></i>
-                                            </td>
-                                        </tr>
-                                        </tbody>
+                                        @endforeach
                                     </table>
                                 </div>
                                 <div class="select-total">
                                     <span>összesen:</span>
-                                    <h5>$120.00</h5>
+                                    <h5>{{\Cart::session(Auth::guard('buyer')->id())->getTotal()}} Ft</h5>
                                 </div>
                                 <div class="select-button">
                                     <a href="{{ url('cart') }}" class="primary-btn view-card">Kosár</a>
@@ -110,7 +95,7 @@
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li><a href="{{ url('/')}}">Főoldal</a></li>
-                    <li><a href="{{ url('products') }}">Termékek</a>
+                    <li><a>Termékek</a>
                         <ul class="dropdown">
                             <li><a href="{{ url('products/csempe') }}">Csempék</a></li>
                             <li><a href="{{ url('products/parketta') }}">Parketták</a></li>

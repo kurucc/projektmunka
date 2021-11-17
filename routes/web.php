@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('products', [ProductsController::class,'showProductsPage']);
+//Route::get('products', [ProductsController::class,'showProductsPage']);
 Route::get('products/csempe', [ProductsController::class,'showProducts']);
 Route::get('products/parketta', [ProductsController::class,'showProducts']);
 Route::get('products/parketta/{name}/{color}', [ProductsController::class,'showUniqueProducts']);
