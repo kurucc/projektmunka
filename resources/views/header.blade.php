@@ -44,22 +44,14 @@
     <div class="container">
         <div class="inner-header">
             <div class="row">
-                <div class="col-lg-2 col-md-2">
+                <div class="col-lg-6 col-md-6">
                     <div class="logo">
                         <a href="{{ url('/') }}">
-                            <img src="{{ URL::asset('img/logo.png') }}" alt="" style="width: 90px;">
+                            <img src="{{ URL::asset('img/logo_dark.png') }}" alt="" style="width: 120px;">
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-7 col-md-7">
-                    <div class="advanced-search">
-                        <div class="input-group">
-                            <input type="text" placeholder="Termékek keresése...">
-                            <button type="button"><i class="ti-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 text-right col-md-3">
+                <div class="col-lg-6 text-right col-md-6 float-right">
                     <ul class="nav-right">
                         <li class="cart-icon">
                             <a href="#">

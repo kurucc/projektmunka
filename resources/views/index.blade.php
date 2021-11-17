@@ -91,7 +91,7 @@
                     <div class="col-lg-5">
                         <h1>Parketták</h1>
                         <p>Nálunk a legjobb minőségű parkettákat találja meg nagyszerű áron! Valósítsa meg álmai otthonát termékeinkkel!</p>
-                        <a href="#" class="btn primary-btn">Tovább a parkettákhoz!</a>
+                        <a href="{{ url('/products/parketta') }}" class="btn primary-btn">Tovább a parkettákhoz!</a>
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
                     <div class="col-lg-5">
                         <h1>Csempék</h1>
                         <p>Találja meg kedvenc csempéjét a termékeink között! Csempéinkkel a fürdőszobai relaxálás még mesésebb lesz!</p>
-                        <a href="#" class="btn primary-btn">Tovább a csempékhez!</a>
+                        <a href="{{ url('/products/csempe') }}" class="btn primary-btn">Tovább a csempékhez!</a>
                     </div>
                 </div>
             </div>
