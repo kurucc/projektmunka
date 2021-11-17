@@ -89,11 +89,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
-                        <span>Bag,kids</span>
-                        <h1>Black friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="btn primary-btn">Shop Now</a>
+                        <h1>Parketták</h1>
+                        <p>Nálunk a legjobb minőségű parkettákat találja meg nagyszerű áron! Valósítsa meg álmai otthonát termékeinkkel!</p>
+                        <a href="#" class="btn primary-btn">Tovább a parkettákhoz!</a>
                     </div>
                 </div>
 
@@ -103,11 +101,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
-                        <span>Bag,kids</span>
-                        <h1>Black friday</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore</p>
-                        <a href="#" class="btn primary-btn">Shop Now</a>
+                        <h1>Csempék</h1>
+                        <p>Találja meg kedvenc csempéjét a termékeink között! Csempéinkkel a fürdőszobai relaxálás még mesésebb lesz!</p>
+                        <a href="#" class="btn primary-btn">Tovább a csempékhez!</a>
                     </div>
                 </div>
             </div>
