@@ -1,8 +1,14 @@
 @include('header')
 <div class="background">
-<div class="container d-flex alig-items-center py-3">
+<div class="container d-flex align-items-center py-3">
 <h2>Üdv!</h2>
-<button type="submit" class="btn btn-light logout-btn mx-5"> <a class="logout" href={{ url('logout') }}>Logout</a> </button>
+    <a class="logout" href={{ url('logout') }}><button type="submit" class="btn btn-light logout-btn">Kijelentkezés</button></a>
+@if(Auth::guard('employee')->check() && Auth::guard('employee')->user()->role == 'admin')
+        <a class="logout" href={{ url('dashboard/admin') }}><button type="submit" class="btn btn-light logout-btn">Admin felület</button></a>
+@endif
+@if(Auth::guard('employee')->check() && Auth::guard('employee')->user()->role == 'munkás')
+    <a class="logout" href={{ url('dashboard/worker') }}><button type="submit" class="btn btn-light logout-btn">Munkás felület</button></a>
+@endif
 </div>
 <div class="container">
     <div class="row">
