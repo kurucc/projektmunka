@@ -63,7 +63,8 @@
                                     <table>
                                         @foreach(\Cart::session(Auth::guard('buyer')->id())->getContent() as $row)
                                             <tr>
-                                                <td class="si-pic"><img src="{{ URL::asset($row->picture_path) }}" alt=""></td>
+                                                <td class="si-pic"><img src="{{ URL::asset($row->picture_path) }}"
+                                                                        alt=""></td>
                                             </tr>
                                             <td class="si-text">
                                                 <div class="product-selected">
@@ -83,8 +84,6 @@
                                     <a href="#" class="primary-btn checkout-btn">Fizetés</a>
                                 </div>
                             </div>
-                        </li>
-                        <li class="cart-price">$150.00</li>
                     </ul>
                 </div>
             </div>
