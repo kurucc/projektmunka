@@ -83,9 +83,11 @@
                     <div class="filter-widget">
                         <h4 class="fw-title">Szín</h4>
                         <div class="fw-color-choose">
+                            <select class="selectpicker" multiple="multiple" name="color[]">
                                 @foreach($colors as $color)
-                                    <input type="checkbox" name={{$color['color']}}/> <label style="margin-bottom: 5px">{{$color['color']}} </label>
+                                    <option>{{$color['color']}}</option>
                                 @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="filter-widget sale align-items-center">
@@ -93,12 +95,12 @@
                     </div>
                     <div class="filter-widget">
                         <h4 class="fw-title">Szűrés</h4>
-                        <select class="form-control" name="sortBy">
-                            <option value="name_asc" selected>Név szerint növekvő (A-Z)</option>
-                            <option value="name_desc">Név szerint csökkenő (Z-A)</option>
+                        <select class="selectpicker" name="sortBy">
+                            <option value="name_asc" selected>Név szerint növekvő</option>
+                            <option value="name_desc">Név szerint csökkenő</option>
                             <option value="gross_price_asc">Ár szerint növekvő</option>
                             <option value="gross_price_desc">Ár szerint csökkenő</option>
-                        </select><br>
+                        </select><br><br>
                         <input type="text" class="form-control" placeholder="Termékek keresése..." name="searchText">
                         <input type="submit" class="btn mt-3 filter-btn" value="Szűrés">
                     </div>
@@ -110,19 +112,14 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product-item">
                                 <div class="pi-pic">
-                                    <img src="{{ URL::asset('img/products/product-1.jpg') }}" alt="">
+                                    <a href="{{ url('products/' . $project->type . '/' . $project->name . '/' . $project->color) }}"><img src="{{ URL::asset('img/products/product-1.jpg') }}" alt=""></a>
                                     @if(!empty($project->sale))
                                         <div class="sale pp-sale">Leárazás - {{ $project->sale . '%'}}</div>
                                     @endif
-                                    <ul>
-                                        {{--TODO cart-ba rakás megcsinálása vagy kivétele--}}
-                                        <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                        <li class="quick-view"><a href="{{ url('products/' . $project->type . '/' . $project->name . '/' . $project->color) }}">+ Megnézem</a></li>
-                                    </ul>
                                 </div>
                                 <div class="pi-text">
                                     <a href="#">
-                                        <h5></h5>
+                                        <h5>{{$project->name}}</h5>
                                     </a>
                                     <div class="product-price">
                                         {{ $project->gross_price }} Ft
