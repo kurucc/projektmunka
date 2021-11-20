@@ -600,12 +600,18 @@ ol {
 	position: relative;
 	top: 100px;
 	opacity: 0;
+    color: black;
+background-color:  #dfad51;
 }
 
 .hero-items .single-hero-items .primary-btn {
 	position: relative;
 	top: 100px;
 	opacity: 0;
+    background-color: #252525 !important;
+}
+.hero-items .single-hero-items .primary-btn:hover {
+    color: #dfad51 !important;
 }
 
 .hero-items .owl-item.active .single-hero-items h1,
@@ -644,7 +650,7 @@ ol {
 }
 
 .hero-items .owl-nav button[type=button]:hover {
-	color: #dfad51;
+	color: #dfad51 !important;
 }
 
 .hero-items .owl-nav button[type=button].owl-next {
@@ -716,72 +722,6 @@ ol {
 	background: #ffffff;
 	border-radius: 2px;
 }
-
-/*---------------------
-  Instagram Photo
------------------------*/
-
-.instagram-photo {
-	overflow: hidden;
-}
-
-.instagram-photo .insta-item {
-	float: left;
-	width: 16.66%;
-	height: 320px;
-	text-align: center;
-	position: relative;
-}
-
-.instagram-photo .insta-item:hover:before {
-	opacity: 1;
-}
-
-.instagram-photo .insta-item:hover .inside-text {
-	opacity: 1;
-	visibility: visible;
-	z-index: 99;
-}
-
-.instagram-photo .insta-item:before {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.3);
-	content: "";
-	opacity: 0;
-	-webkit-transition: all 0.3s;
-	-webkit-transition: 0.3s;
-	-o-transition: 0.3s;
-	transition: 0.3s;
-}
-
-.instagram-photo .insta-item .inside-text {
-	padding-top: 130px;
-	opacity: 0;
-	visibility: hidden;
-	position: relative;
-	-webkit-transition: all 0.3s;
-	-webkit-transition: 0.3s;
-	-o-transition: 0.3s;
-	transition: 0.3s;
-}
-
-.instagram-photo .insta-item .inside-text i {
-	font-size: 30px;
-	color: #ffffff;
-}
-
-.instagram-photo .insta-item .inside-text h5 {
-	margin-top: 14px;
-}
-
-.instagram-photo .insta-item .inside-text h5 a {
-	color: #ffffff;
-}
-
 
 /*---------------------
   Footer
@@ -1291,8 +1231,30 @@ ol {
 	line-height: 39px;
 }
 
-.prduct-list .product-item {
+.product-list .product-item {
 	margin-bottom: 25px;
+}
+
+.product-list .product-item {
+    margin-bottom: 25px;
+}
+
+.product-list .product-item .sale{
+    background-color: #e7ab3c;
+    text-align: center;
+    font-weight: 600;
+}
+
+.product-list .product-item .product-price {
+    font-weight: 700;
+    color: #636363;
+}
+
+.product-list .product-item .product-price .crossed{
+    color: #e7ab3c;
+    text-decoration: line-through;
+    text-decoration-color: #636363;
+    font-weight: normal;
 }
 
 .loading-more {
@@ -2592,9 +2554,6 @@ ol {
 	.nav-item .nav-menu li a {
 		padding: 16px 10px 15px;
 	}
-	.instagram-photo .insta-item .inside-text h5 {
-		font-size: 14px;
-	}
 	.tab-item ul li a {
 		padding: 18px 39px;
 	}
@@ -2606,10 +2565,6 @@ ol {
 /* Large Device: 480px */
 
 @media only screen and (max-width: 767px) {
-	.instagram-photo .insta-item {
-		width: 50%;
-		height: 300px;
-	}
 	.copyright-reserved .copyright-text {
 		float: none;
 		margin-bottom: 10px;
@@ -2718,9 +2673,6 @@ ol {
 /* Small Device: 320px */
 
 @media only screen and (max-width: 479px) {
-	.instagram-photo .insta-item {
-		width: 100%;
-	}
 	.inner-header .advanced-search .input-group {
 		max-width: 100%;
 	}

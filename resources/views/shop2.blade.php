@@ -119,12 +119,12 @@
                                 </div>
                                 <div class="pi-text">
                                     <a href="#">
-                                        <h5>{{$project->name}}</h5>
+                                        <h4 class="text-capitalize">{{$project->name}}</h4>
                                     </a>
                                     <div class="product-price">
                                         {{ $project->gross_price }} Ft
                                         @if(!empty($project->sale))
-                                            <span>{{ $project->gross_price + ($project->gross_price * $project->sale/100)  }} Ft</span>
+                                            <span class="crossed">{{ $project->gross_price + ($project->gross_price * $project->sale/100)  }} Ft</span>
                                         @endif
                                     </div>
                                 </div>

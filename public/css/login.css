@@ -1,5 +1,5 @@
 .login_bg {
-  background-color: #fab589;
+  background-color: #dfad51;
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -18,23 +18,37 @@
   margin: 5px;
   text-align: center;
 }
-h6,
-h3 {
-  color: white;
-}
-.btn {
+.login, .register {
   margin-top: 10px;
 }
 .card-body {
   padding: 5px !important;
 }
+
+.card-body h5, h6 {
+    color: white;
+}
+
+.card-body a {
+    color: #e7ab3c;
+}
+
+.card-body a:hover{
+    color: white;
+}
+
 .card {
-  background-color: rgb(18, 18, 71) !important;
+  background-color: #252525 !important;
   color: white;
 }
+
 .card-header,
 .card-footer {
-  background-color: rgb(18, 18, 71) !important;
+  background-color: #252525 !important;
+}
+
+.card-header h4 {
+    color: white;
 }
 .forgotten {
   font-size: small;
