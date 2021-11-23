@@ -86,8 +86,15 @@ Route::middleware(['isEmployee'])->group(function () {
     Route::get('dashboard/worker/stats', [EmployeeController::class,'showProductsCount']);
     Route::get('dashboard/worker/stats/download', [EmployeeController::class,'downloadStats']);
     Route::get('dashboard/worker/order', [EmployeeController::class,'getOrders']);
-
     Route::post('dashboard/worker/order', [EmployeeController::class,'saveOrders']);
+
+    Route::get('dashboard/worker/orders', [EmployeeController::class,'getAllOrder']);
+    Route::get('dashboard/worker/orders/buyers', [EmployeeController::class,'getBuyerOrders']);
+    Route::get('dashboard/worker/orders/workers', [EmployeeController::class,'getWorkerOrders']);
+
+    Route::get('dashboard/worker/supplies', [EmployeeController::class,'getSupplies']);
+    Route::get('dashboard/worker/supplies/csempe', [EmployeeController::class,'getCsempeSupplies']);
+    Route::get('dashboard/worker/supplies/parketta', [EmployeeController::class,'getParkettaSupplies']);
 });
 
 ///---------------CART---------------///

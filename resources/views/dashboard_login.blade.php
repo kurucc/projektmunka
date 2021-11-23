@@ -5,6 +5,11 @@
         <a class="logout" href={{ url('logout') }}>
             <button type="submit" class="btn btn-light logout-btn">Kijelentkezés</button>
         </a>
+        @if(Auth::guard('buyer')->check())
+            <a class="logout" href={{ url('dashboard/prevorders') }}>
+                <button type="submit" class="btn btn-light logout-btn">Előző rendelések</button>
+            </a>
+        @endif
         @if(Auth::guard('employee')->check() && Auth::guard('employee')->user()->role == 'admin')
             <a class="logout" href={{ url('dashboard/admin') }}>
                 <button type="submit" class="btn btn-light logout-btn">Admin felület</button>

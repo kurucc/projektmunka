@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cities;
 use App\Models\Technician;
 use Illuminate\Http\Request;
 
@@ -13,24 +14,31 @@ class TechnicianController extends Controller
         $county = $request->get('county');
         $type = $request->get('type');
         $pageSize = $request->get('pageSize', 15);
-        $sortBy = $request->get('sortBy','county');
-        $orderBy = $request->get('orderBy','asc');
+        $sortBy = $request->get('sortBy', 'county');
+        $orderBy = $request->get('orderBy', 'asc');
 
+        $counties = Technician::query()->distinct()->pluck('county');
+        $cities = Cities::query()
+            ->distinct()
+            ->pluck('city_name');
         $query = Technician::query();
-       
-        if(!empty($county))
-        {
-            $query->where('county', '=', $county);
+
+        if (!empty($county)) {
+            if ($county != 'Összes') {
+                $query->where('county', '=', $county);
+            }
         }
-        if(!empty($city))
-        {
-            $query->join('cities', 'cities.zip_code', 'technicians.zip_code')->where('cities.city_name', '=', $city);
+        if (!empty($city)) {
+            if ($city != 'Összes') {
+                $query->join('cities', 'cities.zip_code', 'technicians.zip_code')->where('cities.city_name', '=', $city);
+            }
         }
-        if(!empty($type))
-        {
-            $query->where('technicians.type', '=', $type);
+        if (!empty($type)) {
+            if ($type != 'Összes') {
+                $query->where('technicians.type', '=', $type);
+            }
         }
-        $techs = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
-        return view('technicians', compact('techs'));
+        $techs = $query->orderBy($sortBy, $orderBy)->paginate($pageSize);
+        return view('technicians', compact('techs', 'counties', 'cities'));
     }
 }

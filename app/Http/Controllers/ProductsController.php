@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Products;
 use App\Models\User;
 use App\Models\Users;
+use App\ProductSimilarity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,11 @@ class ProductsController extends Controller
 {
     public function showUniqueProducts($name, $color)
     {
+        if(empty(Auth::guard('buyer')->id()) && empty(Auth::guard('employee')->id()))
+        {
+            return redirect('auth');
+        }
+
         $currentProduct = DB::table('products')
         ->where('color', '=', $color)
         ->where('name', '=', $name)
@@ -31,10 +37,13 @@ class ProductsController extends Controller
         $selectedId      = $currentProduct[0]->id;
         $selectedProduct = $currentProduct;
 
-        $productSimilarity = new \App\ProductSimilarity($products);
+        $productSimilarity = new ProductSimilarity($products);
         $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
         $products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
-        return view('product-details', compact('selectedProduct', 'products'));
+
+        $sortedProducts = array_slice($products, 0, 3);
+
+        return view('product-details', compact('selectedProduct', 'sortedProducts'));
     }
     public function saveToCart($name, $color, Request $request)
     {

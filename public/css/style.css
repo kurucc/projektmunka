@@ -399,6 +399,16 @@ ol {
 	line-height: 15px;
 }
 
+/*input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}*/
+
 .inner-header .nav-right li.cart-icon .cart-hover {
 	position: absolute;
 	right: -70px;

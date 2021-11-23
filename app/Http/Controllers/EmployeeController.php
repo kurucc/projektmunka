@@ -32,35 +32,39 @@ class EmployeeController extends Controller
         $from = $request->get('dateFrom', now());
         $to = $request->get('dateTo', now());
 
-        $ordersCountBetweenDates = Order::whereBetween('created_at', [$from, $to])->count();
+        $ordersCountBetweenDates = Order::whereBetween('created_at', [$from, $to])->where('direction', '=', 0)->count();
         $parkettaOrdersCountBetweenDates = Order::whereBetween('created_at', [$from, $to])
+            ->where('direction', '=', 0)
         ->join('item', 'order_id', 'orders.id')
         ->join('products', 'product_id', 'products.id')
         ->where('products.type', '=', 'parketta')
         ->count();
 
         $csempeOrdersCountBetweenDates = Order::whereBetween('created_at', [$from, $to])
+            ->where('direction', '=', 0)
         ->join('item', 'order_id', 'orders.id')
         ->join('products', 'product_id', 'products.id')
         ->where('products.type', '=', 'csempe')
         ->count();
 
         $parkettaSumBetweenDates = Order::whereBetween('created_at', [$from, $to])
+            ->where('direction', '=', 0)
         ->join('item', 'order_id', 'orders.id')
         ->join('products', 'product_id', 'products.id')
         ->where('products.type', '=', 'parketta')
         ->sum('gross_sum');
 
         $csempeSumBetweenDates = Order::whereBetween('created_at', [$from, $to])
+            ->where('direction', '=', 0)
         ->join('item', 'order_id', 'orders.id')
         ->join('products', 'product_id', 'products.id')
         ->where('products.type', '=', 'csempe')
         ->sum('gross_sum');
 
         $ordersSumBetweenDates = $parkettaSumBetweenDates + $csempeSumBetweenDates;
-        
-        return view('workerdash', compact('csempeCount', 'parkettaCount', 'sumCount', 'parkettaMaxPrice', 
-        'csempeMaxPrice', 'csempeOnSale', 'parkettaOnSale', 'sumSale', 'ordersCountBetweenDates', 'parkettaOrdersCountBetweenDates', 
+
+        return view('workerdash', compact('csempeCount', 'parkettaCount', 'sumCount', 'parkettaMaxPrice',
+        'csempeMaxPrice', 'csempeOnSale', 'parkettaOnSale', 'sumSale', 'ordersCountBetweenDates', 'parkettaOrdersCountBetweenDates',
         'csempeOrdersCountBetweenDates', 'parkettaSumBetweenDates', 'csempeSumBetweenDates', 'ordersSumBetweenDates', 'from', 'to'));
     }
     public function downloadStats(Request $request)
@@ -104,8 +108,8 @@ class EmployeeController extends Controller
         ->sum('gross_sum');
 
         $ordersSumBetweenDates = $parkettaSumBetweenDates + $csempeSumBetweenDates;
-        
-        return response()->streamDownload(function() 
+
+        return response()->streamDownload(function()
         use($csempeCount, $parkettaCount, $sumCount, $parkettaMaxPrice, $csempeMaxPrice, $parkettaOnSale,
             $csempeOnSale, $sumSale, $ordersCountBetweenDates, $parkettaOrdersCountBetweenDates, $csempeOrdersCountBetweenDates, $parkettaSumBetweenDates,
             $csempeSumBetweenDates, $ordersSumBetweenDates)
@@ -135,6 +139,59 @@ class EmployeeController extends Controller
         $csempek = Products::where('type', '=', 'csempe')->get();
         return view('workerOrder', compact('parkettak', 'csempek'));
     }
+    public function getAllOrder()
+    {
+        return view('workerOrders');
+    }
+
+    public function getBuyerOrders()
+    {
+        $orders = Order::select('order_number', 'color', 'products.name as product_name','created_at', 'quantity','net_sum', 'gross_sum', 'email', 'tel', 'buyers.name as buyer_name', 'delivery_zip', 'delivery_address', 'delivery_city', 'invoice_name', 'invoice_city', 'invoice_company', 'invoice_tax', 'invoice_zip', 'invoice_city', 'invoice_address')
+            ->where('direction', '=', 0)
+            ->where('delivered', '=', 0)
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->join('buyers', 'users.buyer_id', '=', 'buyers.id')
+            ->join('item', 'item.order_id', '=', 'orders.id')
+            ->join('products', 'item.product_id', '=', 'products.id')
+            ->get();
+
+        return view('buyerAllOrder', compact('orders'));
+    }
+
+    public function getWorkerOrders()
+    {
+        $orders = Order::select('order_number', 'created_at', 'email', 'tel', 'color', 'products.name as product_name', 'quantity')
+            ->where('direction', '=', 1)
+            ->where('delivered', '=', 0)
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->join('employees', 'users.employee_id', '=', 'employees.id')
+            ->join('item', 'item.order_id', '=', 'orders.id')
+            ->join('products', 'item.product_id', '=', 'products.id')
+            ->get();
+
+        return view('workerAllOrder', compact('orders'));
+    }
+
+    function getSupplies()
+    {
+        return view('supplies');
+    }
+
+    function getCsempeSupplies()
+    {
+        $products = Products::select('name', 'color', 'actual_stock', 'type', 'barcode')
+            ->where('type', '=', 'csempe')
+            ->get();
+        return view('suppliesCsempe', compact('products'));
+    }
+
+    function getParkettaSupplies()
+    {
+        $products = Products::select('name', 'color', 'actual_stock', 'type', 'barcode')
+            ->where('type', '=', 'parketta')
+            ->get();
+        return view('suppliesParketta', compact('products'));
+    }
     public function saveOrders(Request $request)
     {
         if($request->has('csempeRendeles'))
@@ -150,7 +207,7 @@ class EmployeeController extends Controller
                 'delivered' => 0,
                 'invoice_id' => $invoice->id
             ]);
-            foreach ($request->csempe as $key => $value) 
+            foreach ($request->csempe as $key => $value)
             {
                 if(!empty($value))
                 {
@@ -176,7 +233,7 @@ class EmployeeController extends Controller
                 'delivered' => 0,
                 'invoice_id' => $invoice->id
             ]);
-            foreach ($request->parketta as $key => $value) 
+            foreach ($request->parketta as $key => $value)
             {
                 if(!empty($value))
                 {

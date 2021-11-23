@@ -21,16 +21,6 @@
                 <div class="col-12 col-lg-7">
                     <div class="single_product_thumb">
                         <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url('img/product-img/pro-big-1.jpg');">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url('img/product-img/pro-big-2.jpg');">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url('img/product-img/pro-big-3.jpg');">
-                                </li>
-                                <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url('img/product-img/pro-big-4.jpg');">
-                                </li>
-                            </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <a class="gallery_img" href="{{ URL::asset('images/product-img/pro-big-1.jpg') }}">
@@ -50,9 +40,9 @@
                                 <h6>{{ $selectedProduct[0]->name }}</h6>
                             <!-- Avaiable -->
                             @if($selectedProduct[0]->actual_stock >= 1)
-                            <p class="avaibility"><i class="fa fa-circle"></i> Készleten</p>
+                            <p class="avaibility"><i class="fa fa-circle" style="color:green"></i> Készleten</p>
                             @else
-                                <p class="avaibility"><i class="fa fa-circle"></i> Nincs készleten</p>
+                                <p class="avaibility"><i class="fa fa-circle" style="color:red"></i> Nincs készleten</p>
                             @endif
                         </div>
 
@@ -64,11 +54,13 @@
                         <form class="cart clearfix" method="post">
                             @csrf
                             <div class="cart-btn d-flex mb-50">
-                                <p>Qty</p>
+                                <p>Darabszám</p><br>
                                 <div class="quantity">
-                                    <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                    <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="mennyiség" value="1">
-                                    <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                    @if($selectedProduct[0]->actual_stock >= 1)
+                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="{{$selectedProduct[0]->actual_stock}}" onkeydown="return false;" name="mennyiség" value="0">
+                                    @else
+                                        <input type="number" class="qty-text" value="0" disabled>
+                                    @endif
                                 </div>
                             </div>
                             <button type="submit" name="addtocart" value="5" class="btn amado-btn">Kosárba</button>
@@ -81,18 +73,19 @@
     </div>
     <!-- Product Details Area End -->
 </div>
-@foreach ($products as $product)
-    <div class="row mb-5">
-        <div class="offset-3 col-6">
+<div class="row mb-5 mt-5 mx-2">
+@foreach ($sortedProducts as $product)
+        <div class="col-4">
             <div class="card">
                 <div class="text-center" style="background-color: #ccc">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Similarity: {{ round($product['similarity'] * 100, 1) }}%</h5>
-                    <a href={{ url('products/' . $product['type'] . '/' . $product['name'] . '/' . $product['color']) }}><p class="card-text text-muted">{{ $product['name'] }} {{ $product['color'] }} (${{ $product['gross_price'] }})</p></a>
+                    <a href={{ url('products/' . $product['type'] . '/' . $product['name'] . '/' . $product['color']) }}><p class="card-text text-muted">{{ $product['name'] }} {{ $product['color'] }} ({{ $product['gross_price'] }} Ft)</p></a>
                 </div>
             </div>
         </div>
-    </div>
+
 @endforeach
+</div>
 @include('footer')
