@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Calculations;
 use App\Models\Order;
 use App\Models\Products;
 use App\Models\User;
@@ -19,85 +20,145 @@ class ProductsController extends Controller
 {
     public function showUniqueProducts($name, $color)
     {
-        if(empty(Auth::guard('buyer')->id()) && empty(Auth::guard('employee')->id()))
-        {
+        if (empty(Auth::guard('buyer')->id()) && empty(Auth::guard('employee')->id())) {
             return redirect('auth');
         }
 
         $currentProduct = DB::table('products')
-        ->where('color', '=', $color)
-        ->where('name', '=', $name)
-        ->get();
+            ->where('color', '=', $color)
+            ->where('name', '=', $name)
+            ->get();
 
-        if(count($currentProduct) < 1)
-        {
+        if (count($currentProduct) < 1) {
             return redirect('404');
         }
-        $products        = Products::all()->toArray();
-        $selectedId      = $currentProduct[0]->id;
+        $products = Products::all()->toArray();
+        $selectedId = $currentProduct[0]->id;
         $selectedProduct = $currentProduct;
 
         $productSimilarity = new ProductSimilarity($products);
-        $similarityMatrix  = $productSimilarity->calculateSimilarityMatrix();
-        $products          = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
+        $similarityMatrix = $productSimilarity->calculateSimilarityMatrix();
+        $products = $productSimilarity->getProductsSortedBySimularity($selectedId, $similarityMatrix);
 
         $sortedProducts = array_slice($products, 0, 3);
 
         return view('product-details', compact('selectedProduct', 'sortedProducts'));
     }
+
+    public function getCalculations()
+    {
+        $calculations = Calculations::select('products.height as product_height', 'products.width as product_width', 'name', 'calculated_price', 'type', 'color', 'calculations.width', 'calculations.height', 'calculations.length')
+            ->where('buyer_id', '=', Auth::guard('buyer')->id())
+            ->join('products', 'product_id', '=', 'products.id')
+            ->get();
+
+        return view('calculations', compact('calculations'));
+    }
+
     public function saveToCart($name, $color, Request $request)
     {
-        if(empty(Auth::guard('buyer')->id()))
-        {
+        if (empty(Auth::guard('buyer')->id())) {
             return redirect('auth');
         }
 
-        $id = DB::table('products')
-        ->where('color', '=', $color)
-        ->where('name', '=', $name)
-        ->get()[0]->id;
+        if ($request->has('addtocart')) {
 
-        $products = Products::find($id);
-        $rowId = rand(0,9999999999);
-        $userID = Auth::guard('buyer')->id();
-        $items = \Cart::session(Auth::guard('buyer')->id())->getContent();
-        foreach ($items as $item) {
-            if(($item->associatedModel->color == $request->color) && ($item->name == $request->name))
+            $id = DB::table('products')
+                ->where('color', '=', $color)
+                ->where('name', '=', $name)
+                ->get()[0]->id;
+
+            $products = Products::find($id);
+            $rowId = rand(0, 9999999999);
+            $userID = Auth::guard('buyer')->id();
+            $items = \Cart::session(Auth::guard('buyer')->id())->getContent();
+            foreach ($items as $item) {
+                if (($item->associatedModel->color == $request->color) && ($item->name == $request->name)) {
+                    \Cart::session(Auth::guard('buyer')->id())->update($item->id, [
+                        'quantity' => $request->mennyiség,
+                    ]);
+                    return redirect('cart');
+                }
+            }
+            if (empty($products->sale)) {
+                $price = $products->gross_price;
+            } else {
+                $price = $products->gross_price * (1.00 - ($products->sale / 100));
+            }
+            \Cart::session($userID)->add(array(
+                'id' => $rowId,
+                'name' => $products->name,
+                'price' => $price,
+                'quantity' => $request->mennyiség,
+                'attributes' => array(),
+                'associatedModel' => $products
+            ));
+
+            return redirect('cart');
+        } else {
+            $length = $request->length;
+            $width = $request->width;
+            $height = $request->height;
+
+            $product = Products::where('name', '=', $name)
+                ->where('color', '=', $color)
+                ->get();
+
+            if(!$height)
             {
-                \Cart::session(Auth::guard('buyer')->id())->update($item->id,[
-                    'quantity' => $request->mennyiség,
-                ]);
-                return redirect('cart');
+                $calculatedRoom = $width * $length;
+                $calculatedProduct = $product[0]->width * $product[0]->height;
+
+                $result = $calculatedRoom / $calculatedProduct;
+
+                $calculations = new Calculations;
+                $calculations->buyer_id = Auth::guard('buyer')->id();
+                $calculations->product_id = $product[0]->id;
+                $calculations->width = $width;
+                $calculations->length = $length;
+                $calculations->height = $height;
+                $calculations->calculated_price = round($result) * $product[0]->gross_price;
+
+                abort_if(!$calculations->save(), '500', 'Sikertelen mentés..');
+
+                return redirect('dashboard/calculations');
+            }
+            else
+            {
+                $calculatedRoom = $width * $length;
+                $calculatedRoom2 = $height * $width * 2;
+                $calculatedRoom3 = $height * $length * 2;
+
+                $calculatedResult = $calculatedRoom + $calculatedRoom2 + $calculatedRoom3;
+                $calculatedProduct = $product[0]->width * $product[0]->height;
+
+                $result = $calculatedResult / $calculatedProduct;
+
+                $calculations = new Calculations;
+                $calculations->buyer_id = Auth::guard('buyer')->id();
+                $calculations->product_id = $product[0]->id;
+                $calculations->width = $width;
+                $calculations->length = $length;
+                $calculations->height = $height;
+                $calculations->calculated_price = round($result) * $product[0]->gross_price;
+
+                abort_if(!$calculations->save(), '500', 'Sikertelen mentés..');
+
+                return redirect('dashboard/calculations');
             }
         }
-        if(empty($products->sale))
-        {
-            $price = $products->gross_price;
-        }
-        else
-        {
-            $price = $products->gross_price * (1.00 - ($products->sale/100));
-        }
-        \Cart::session($userID)->add(array(
-            'id' => $rowId,
-            'name' => $products->name,
-            'price' => $price,
-            'quantity' => $request->mennyiség,
-            'attributes' => array(),
-            'associatedModel' => $products
-        ));
-
-        return redirect('cart');
     }
+
     function showProductsPage()
     {
         return view('products');
     }
+
     function showProducts(ProductRequest $request)
     {
         $searchText = $request->get('searchText');
         $pageSize = $request->get('pageSize', 15);
-        $sortBy = $request->get('sortBy','name');
+        $sortBy = $request->get('sortBy', 'name');
         $orderBy = 'asc';
         $priceFrom = $request->get('priceFrom');
         $priceTo = $request->get('priceTo');
@@ -109,7 +170,7 @@ class ProductsController extends Controller
         $color = $request->get('color');
 
         //TODO az url csak localba jó így
-        $query = Products::query()->where('type', '=', explode('http://127.0.0.1:8000/products/',URL::current())[1]);
+        $query = Products::query()->where('type', '=', explode('http://127.0.0.1:8000/products/', URL::current())[1]);
 
         //összes különböző szín lekérdezése
         $colors = json_decode($query->distinct()->get('color'), true);
@@ -123,68 +184,67 @@ class ProductsController extends Controller
         $thicknessMin = json_decode(floor($query->min('thickness')), true);
         $thicknessMax = json_decode(round($query->max('thickness')), true);
 
-        if(!empty($searchText)) {
-            $query->where(function($query) use($searchText){
-                $query->where('name','like', '%'.$searchText . '%');
+        if (!empty($searchText)) {
+            $query->where(function ($query) use ($searchText) {
+                $query->where('name', 'like', '%' . $searchText . '%');
 
             });
         }
-        if((!empty($priceFrom)) && (!empty($priceTo))) {
-            $query->whereBetween('gross_price', [$priceFrom,$priceTo]);
+        if ((!empty($priceFrom)) && (!empty($priceTo))) {
+            $query->whereBetween('gross_price', [$priceFrom, $priceTo]);
         }
-        if((!empty($widthFrom)) && (!empty($widthTo))) {
-            $query->whereBetween('width', [$widthFrom,$widthTo]);
+        if ((!empty($widthFrom)) && (!empty($widthTo))) {
+            $query->whereBetween('width', [$widthFrom, $widthTo]);
         }
-        if((!empty($thicknessFrom)) && (!empty($thicknessTo))) {
-            $query->whereBetween('thickness', [$thicknessFrom,$thicknessTo]);
+        if ((!empty($thicknessFrom)) && (!empty($thicknessTo))) {
+            $query->whereBetween('thickness', [$thicknessFrom, $thicknessTo]);
         }
-        if(!empty($sale)) {
+        if (!empty($sale)) {
             $query->where('sale', '<>', 'NULL');
         }
 
-        if(!empty($color)) {
+        if (!empty($color)) {
 
-            if(count($color) > 1)
-            {
-                $query->where(function($query) use($color){
+            if (count($color) > 1) {
+                $query->where(function ($query) use ($color) {
                     $query->where('color', '=', $color[0]);
-                    for ($i=1; $i < count($color); $i++) {
+                    for ($i = 1; $i < count($color); $i++) {
                         $query->orWhere('color', '=', $color[$i]);
                     }
                 });
-            }
-            else
-            {
+            } else {
                 $query->where('color', '=', $color);
             }
         }
-        if($sortBy == 'name_asc') {
+        if ($sortBy == 'name_asc') {
             $sortBy = 'name';
             $orderBy = 'asc';
-        } else if($sortBy == 'name_desc') {
+        } else if ($sortBy == 'name_desc') {
             $sortBy = 'name';
             $orderBy = 'desc';
-        } else if($sortBy == 'gross_price_asc') {
+        } else if ($sortBy == 'gross_price_asc') {
             $sortBy = 'gross_price';
             $orderBy = 'asc';
-        } else if($sortBy == 'gross_price_desc') {
+        } else if ($sortBy == 'gross_price_desc') {
             $sortBy = 'gross_price';
             $orderBy = 'desc';
         }
-        $projects = $query->orderBy($sortBy,$orderBy)->paginate($pageSize);
-        return view('shop2',compact('projects', 'colors', 'priceMin', 'priceMax', 'widthMin', 'widthMax', 'thicknessMin', 'thicknessMax'));
+        $projects = $query->orderBy($sortBy, $orderBy)->paginate($pageSize);
+        return view('shop2', compact('projects', 'colors', 'priceMin', 'priceMax', 'widthMin', 'widthMax', 'thicknessMin', 'thicknessMax'));
     }
+
     public function getPreviousOrders()
     {
         $orders = Users::with('orders')->where('buyer_id', '=', Auth::guard('buyer')->id())->get()[0]['orders'];
 
         return view('previousOrders', compact('orders'));
     }
+
     public function getPreviousOrderItems($orderId)
     {
         $items = Order::join('item', 'order_id', 'orders.id')
-        ->join('products', 'products.id', 'item.product_id')
-        ->where('orders.id', '=', $orderId)->get();
+            ->join('products', 'products.id', 'item.product_id')
+            ->where('orders.id', '=', $orderId)->get();
 
         return view('previousOrdersItems', compact('items'));
     }

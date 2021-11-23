@@ -9,6 +9,9 @@
             <a class="logout" href={{ url('dashboard/prevorders') }}>
                 <button type="submit" class="btn btn-light logout-btn">Előző rendelések</button>
             </a>
+            <a class="logout" href={{ url('dashboard/calculations') }}>
+                <button type="submit" class="btn btn-light logout-btn">Kalkulációk</button>
+            </a>
         @endif
         @if(Auth::guard('employee')->check() && Auth::guard('employee')->user()->role == 'admin')
             <a class="logout" href={{ url('dashboard/admin') }}>

@@ -73,6 +73,14 @@
     </div>
     <!-- Product Details Area End -->
 </div>
+
+<form method="POST" action="{{url()->current()}}">
+    @csrf
+    <input type="number" placeholder="Szélesség.." name="length">
+    <input type="number" placeholder="Hosszúság.." name="width">
+    <input type="number" placeholder="Magasság.." name="height">
+    <button>Kalkuláció</button>
+</form>
 <div class="row mb-5 mt-5 mx-2">
 @foreach ($sortedProducts as $product)
         <div class="col-4">
@@ -85,7 +93,6 @@
                 </div>
             </div>
         </div>
-
 @endforeach
 </div>
 @include('footer')

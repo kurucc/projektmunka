@@ -46,8 +46,10 @@ Route::get('dashboard', [DashboardController::class,'showDashboard'])->middlewar
 Route::get('logout', [WorkersController::class,
 'logout'])->middleware('authCustom');
 
-Route::get('dashboard/prevorders', [ProductsController::class,'getPreviousOrders'])->middleware('authCustom');;
-Route::get('dashboard/prevorders/{orderId}', [ProductsController::class,'getPreviousOrderItems'])->middleware('authCustom');;
+Route::get('dashboard/prevorders', [ProductsController::class,'getPreviousOrders'])->middleware('authCustom');
+Route::get('dashboard/prevorders/{orderId}', [ProductsController::class,'getPreviousOrderItems'])->middleware('authCustom');
+
+Route::get('dashboard/calculations', [ProductsController::class,'getCalculations'])->middleware('authCustom');
 
 
 Route::middleware(['whitelist'])->group(function () {
