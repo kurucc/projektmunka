@@ -10,10 +10,19 @@ class DashboardController extends Controller
 {
     function showDashboard()
     {
-        $buyers = [];
-        if(Auth::guard('buyer')->check()) {
-            $buyers = Buyers::where('username', '=', Auth::guard('buyer')->user()->username)->get();
+        if(Auth::guard('employee')->check())
+        {
+            if(Auth::guard('employee')->user()->role == 'admin')
+            {
+                return view('dashboard_admin');
+            } else {
+                return view('dashboard_worker');
+            }
         }
-        return view('dashboard_login', compact('buyers'));
+        else
+        {
+            $buyers = Buyers::where('username', '=', Auth::guard('buyer')->user()->username)->get();
+            return view('dashboard_login', compact('buyers'));
+        }
     }
 }

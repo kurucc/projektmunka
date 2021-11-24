@@ -89,7 +89,6 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'felhasználónév' => 'required|string|min:6|max:30',
-            'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
             'email' => 'required|email|max:30',
             'születésnap' => 'required|date',
             'tel' => 'nullable|string|min:12|max:12',
@@ -104,7 +103,6 @@ class AdminController extends Controller
         $employees->where('id', '=', $request->id)
         ->update([
             'username' => $request->felhasználónév,
-            'password' => Hash::make($request->jelszó),
             'email' => $request->email,
             'birthday' => $request->születésnap,
             'tel' => $request->tel,
@@ -169,7 +167,6 @@ class AdminController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'felhasználónév' => 'required|string|min:6|max:30',
-            'jelszó' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,30}$/',
             'email' => 'required|email|max:30',
             'születésnap' => 'required|date',
             'telefonszám' => 'nullable|string|min:12|max:12',
@@ -187,7 +184,6 @@ class AdminController extends Controller
         $buyers->where('id', '=', $request->id)
         ->update([
             'username' => $request->felhasználónév,
-            'password' => Hash::make($request->jelszó),
             'email' => $request->email,
             'birthday' => $request->születésnap,
             'tel' => $request->tel,

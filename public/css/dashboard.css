@@ -7,9 +7,9 @@
   min-width: max-content;
   color: white;
 }
-input {
+/*input {
     color:white;
-}
+}*/
 
 input::placeholder{
     color:white;
@@ -23,4 +23,8 @@ input::placeholder{
 .logout:hover {
     color:black;
     font-weight: bold;
+}
+
+.control {
+    background-color: #e7ab3c;
 }

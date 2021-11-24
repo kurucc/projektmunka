@@ -1,0 +1,21 @@
+.admin-control{
+    background-color: #636363;
+    color:white;
+
+}
+
+.golder-header{
+    background-color: #e7ab3c !important;
+}
+.admin-icon{
+    color: black;
+    font-size: 23px;
+}
+a.admin{
+    color: white;
+}
+
+label.required:after {
+    content:"*";
+    color:red;
+}

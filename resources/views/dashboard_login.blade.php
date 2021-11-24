@@ -5,27 +5,14 @@
         <a class="logout" href={{ url('logout') }}>
             <button type="submit" class="btn btn-light logout-btn">Kijelentkezés</button>
         </a>
-        @if(Auth::guard('buyer')->check())
             <a class="logout" href={{ url('dashboard/prevorders') }}>
                 <button type="submit" class="btn btn-light logout-btn">Előző rendelések</button>
             </a>
             <a class="logout" href={{ url('dashboard/calculations') }}>
                 <button type="submit" class="btn btn-light logout-btn">Kalkulációk</button>
             </a>
-        @endif
-        @if(Auth::guard('employee')->check() && Auth::guard('employee')->user()->role == 'admin')
-            <a class="logout" href={{ url('dashboard/admin') }}>
-                <button type="submit" class="btn btn-light logout-btn">Admin felület</button>
-            </a>
-        @endif
-        @if(Auth::guard('employee')->check() && Auth::guard('employee')->user()->role == 'munkás')
-            <a class="logout" href={{ url('dashboard/worker') }}>
-                <button type="submit" class="btn btn-light logout-btn">Munkás felület</button>
-            </a>
-        @endif
     </div>
 
-    @if(Auth::guard('buyer')->check())
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -229,9 +216,5 @@
             </div>
         </div>
 </div>
-@endif
 @include('footer')
 <script src="{{ URL::asset('js/login.js') }}"></script>
-@if (Auth::guard('employee')->check() && Auth::guard('employee')->user()->role === 'admin')
-    <a href={{ url('dashboard/admin') }}>Admin</a>
-@endif

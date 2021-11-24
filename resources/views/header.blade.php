@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{ URL::asset('css/jquery-ui.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ URL::asset('css/dashboard.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ URL::asset('css/admin.css') }}" type="text/css">
 </head>
 
 <body>

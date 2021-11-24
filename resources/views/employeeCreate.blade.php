@@ -9,27 +9,30 @@
         </ul>
     </div>
     @endif
+<div class="container my-2">
+    <h3 class="text-center admin-control">Alkalmazott létrehozása</h3>
     <form method="post">
         @csrf
-        <input type="hidden" name="id">
-        <label>Felhasználónév</label><br>
-        <input type="text" name="felhasználónév" id=""><br>
-        <label>Jelszó</label><br>
-        <input type="password" name="jelszó" id="" placeholder="Jelszó..."><br>
-        <label>Email</label><br>
-        <input type="email" name="email" id="" ><br>
-        <label>Születésnap</label><br>
-        <input type="date" name="születésnap" id="" ><br>
-        <label>Telefonszám</label><br>
-        <input type="tel" name="tel" id=""><br>
-        <label>Adószám</label><br>
-        <input type="text" name="adószám" id="" ><br>
-        <label>Tajszám</label><br>
-        <input type="text" name="tajszám" id=""><br>
-        <label>Bankszámlaszám</label><br>
-        <input type="text" name="bankszámlaszám" id=""><br>
-        <label>Jogkör</label><br>
-        <input type="text" name="jogkör" id=""><br>
-        <input type="submit" value="Létrehozás">
+        <input class="form-control form-control-sm" type="hidden" name="id">
+        <label class="required">Felhasználónév</label><br>
+        <input class="form-control form-control-sm" type="text" name="felhasználónév" id="" placeholder="Felhasználónév" required><br>
+        <label class="required">Jelszó</label><br>
+        <input class="form-control form-control-sm" type="text" name="jelszó" id="" placeholder="Jelszó" required><br>
+        <label class="required">Email</label><br>
+        <input class="form-control form-control-sm" type="email" name="email" id="" placeholder="Email" required><br>
+        <label class="required">Születésnap</label><br>
+        <input class="form-control form-control-sm" type="date" name="születésnap" id="" placeholder="Születésnap" required><br>
+        <label class="required">Telefonszám</label><br>
+        <input class="form-control form-control-sm" type="tel" name="tel" id="" placeholder="Telefonszám" required><br>
+        <label class="required">Adószám</label><br>
+        <input class="form-control form-control-sm" type="text" name="adószám" id="" placeholder="Adószám" required><br>
+        <label class="required">Tajszám</label><br>
+        <input class="form-control form-control-sm" type="text" name="tajszám" id="" placeholder="Tajszám" required><br>
+        <label class="required">Bankszámlaszám</label><br>
+        <input class="form-control form-control-sm" type="text" name="bankszámlaszám" id="" placeholder="Bankszámlaszám" required><br>
+        <label class="required">Jogkör</label><br>
+        <input class="form-control form-control-sm" type="text" name="jogkör" id="" placeholder="Jogkör" required><br>
+        <input class="btn btn-dark my-2" type="submit" value="Létrehozás">
     </form>
+</div>
 @include('footer')

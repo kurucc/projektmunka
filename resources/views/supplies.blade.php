@@ -1,4 +1,15 @@
 @include('header')
-<a href={{ url('dashboard/worker/supplies/csempe') }}>Csempék</a>
-<a href={{ url('dashboard/worker/supplies/parketta') }}>Parketták</a>
+<div class="">
+    <div class="container flex align-items-center py-3 admin my-2">
+        <h1 class="text-center control">Készletek</h1>
+        <div class=" row py-3 text-center">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <a href={{ url('dashboard/worker/supplies/csempe') }}><button type="submit" class="btn btn-dark logout-btn admin">Csempe készletek</button></a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <a href={{ url('dashboard/worker/supplies/parketta') }}><button type="submit" class="btn btn-dark logout-btn admin">Parketta készletek</button></a>
+            </div>
+        </div>
+    </div>
+</div>
 @include('footer')
