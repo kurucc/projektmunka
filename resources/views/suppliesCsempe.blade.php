@@ -1,15 +1,29 @@
 @include('header')
-<div class="container">
-    <div class="row">
-        @foreach($products as $product)
-            <div class="col-3 mb-5">
-            <p>{{ $product->barcode }}</p>
-            <p>{{ $product->name }}</p>
-            <p>{{ $product->color }}</p>
-            <p>{{ $product->type }}</p>
-            <p>{{ $product->actual_stock }}</p>
-            </div>
-        @endforeach
-    </div>
-</div>
+<div class="container my-2"><h2 class="text-center admin-control">Csempék készleten</h2></div>
+
+<div class="text-center mt-2 mb-3">
+    @if (count($products) >= 1)
+        <table class="table table-bordered my-2 m-auto mx-2">
+            <thead class="thead golder-header">
+            <tr class="text-center">
+                <th scope="col">Vonalkód</th>
+                <th scope="col">Termék neve</th>
+                <th scope="col">Termék színe</th>
+                <th scope="col">Termék jelenleg raktáron (db)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($products as $product)
+                <tr class="text-center">
+                    <td>{{ $product->barcode }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->color }}</td>
+                    <td>{{ $product->actual_stock }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @else
+        <h3 class="text-center control">Nem található termék!</h3>
+@endif
 @include('footer')

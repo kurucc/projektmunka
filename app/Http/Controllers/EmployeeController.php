@@ -172,6 +172,12 @@ class EmployeeController extends Controller
         return view('workerAllOrder', compact('orders'));
     }
 
+    function setArrived($id)
+    {
+        Order::where('order_number', '=', $id)->update(['delivered' => 1]);
+        return redirect('dashboard/worker/orders');
+    }
+
     function getSupplies()
     {
         return view('supplies');

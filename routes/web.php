@@ -93,6 +93,8 @@ Route::middleware(['isEmployee'])->group(function () {
     Route::get('dashboard/worker/orders', [EmployeeController::class,'getAllOrder']);
     Route::get('dashboard/worker/orders/buyers', [EmployeeController::class,'getBuyerOrders']);
     Route::get('dashboard/worker/orders/workers', [EmployeeController::class,'getWorkerOrders']);
+    Route::get('dashboard/worker/orders/workers/{id}', [EmployeeController::class,'setArrived']);
+    Route::get('dashboard/worker/orders/buyers/{id}', [EmployeeController::class,'setArrived']);
 
     Route::get('dashboard/worker/supplies', [EmployeeController::class,'getSupplies']);
     Route::get('dashboard/worker/supplies/csempe', [EmployeeController::class,'getCsempeSupplies']);

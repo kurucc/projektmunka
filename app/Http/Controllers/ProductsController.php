@@ -24,8 +24,7 @@ class ProductsController extends Controller
             return redirect('auth');
         }
 
-        $currentProduct = DB::table('products')
-            ->where('color', '=', $color)
+        $currentProduct = Products::where('color', '=', $color)
             ->where('name', '=', $name)
             ->get();
 
