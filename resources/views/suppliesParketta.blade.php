@@ -1,7 +1,7 @@
 @include('header')
 <div class="container my-2"><h2 class="text-center admin-control">Parketták készleten</h2></div>
 
-<div class="text-center mt-2 mb-3">
+<div class="container text-center mt-2 mb-3">
     @if (count($products) >= 1)
         <table class="table table-bordered my-2 m-auto ">
             <thead class="thead golder-header">
@@ -26,4 +26,5 @@
     @else
         <h3 class="text-center control">Nem található termék!</h3>
 @endif
+</div>
 @include('footer')

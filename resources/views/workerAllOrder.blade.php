@@ -3,7 +3,7 @@
 
 <div class="container text-center mt-2 mb-3">
     @if (count($orders) >= 1)
-        <table class="table table-bordered my-2 m-auto ">
+        <table class="table table-bordered my-2 m-auto w-75">
             <thead class="thead golder-header">
             <tr class="text-center">
                 <th colspan="10"><h4><b>Rendelések</b></h4></th>
@@ -22,20 +22,23 @@
             </thead>
             <tbody>
             @foreach ($orders as $order)
-                    <tr class="text-center">
-                        <td>{{ $order->order_number }}</td>
-                        <td>{{ $order->created_at }}</td>
-                        <td>{{ $order->email }}</td>
-                        <td>{{ $order->tel }}</td>
-                        <td>{{ $order->product_name }}</td>
-                        <td>{{ $order->color }}</td>
-                        <td>{{ $order->quantity }}</td>
-                        <td><a class="" href="{{url('dashboard/worker/orders/workers/' . $order->order_number)}}"><i class="fa-check fa">Átvéve</i></a></td>
-                    </tr>
+                <tr class="text-center">
+                    <td>{{ $order->order_number }}</td>
+                    <td>{{ $order->created_at }}</td>
+                    <td>{{ $order->email }}</td>
+                    <td>{{ $order->tel }}</td>
+                    <td>{{ $order->product_name }}</td>
+                    <td>{{ $order->color }}</td>
+                    <td>{{ $order->quantity }}</td>
+                    <td><a class="" href="{{url('dashboard/worker/orders/workers/' . $order->order_number)}}"><i
+                                class="fa-check fa">Átvéve</i></a></td>
+                </tr>
             @endforeach
             </tbody>
         </table>
     @else
-        <h3 class="text-center control">Nem található rendelés!</h3>
-    @endif
+        <h3 class="text-center control ">Nem található rendelés!</h3>
+@endif
+</div>
 @include('footer')
+{{--TODO kijavítani az oldal elcsúszást..--}}
