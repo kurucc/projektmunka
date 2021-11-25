@@ -241,8 +241,12 @@ class ProductsController extends Controller
 
     public function getPreviousOrderItems($orderId)
     {
-        $items = Order::join('item', 'order_id', 'orders.id')
+        $items = Order::select('products.name', 'products.color','gross_price', 'quantity')
+            ->join('item', 'order_id', 'orders.id')
             ->join('products', 'products.id', 'item.product_id')
+            ->join('users', 'users.id', 'orders.user_id')
+            ->join('buyers', 'buyers.id', 'users.buyer_id')
+            ->where('buyer_id', '=', Auth::guard('buyer')->id())
             ->where('orders.id', '=', $orderId)->get();
 
         return view('previousOrdersItems', compact('items'));

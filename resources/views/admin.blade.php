@@ -57,14 +57,13 @@
         @endforeach
         </tbody>
     </table>
-
 @else
     <div class="container text-center mt-2 mb-3">
     <h3 class="text-center control">Nem található vásárló! :(</h3>
     </div>
 @endif
 <div class="container text-center mt-2 mb-3">
-    <button class="btn btn-dark"><a class="admin-add admin" href="/dashboard/admin/create/buyer/"> <i class="fa fa-plus pr-1"></i> Létrehozás</a></button>
+    <a class="admin-add admin" href={{ url('dashboard/admin/create/buyer') }}> <button class="btn btn-dark mt-2"><i class="fa fa-plus pr-1"> Létrehozás</i></button></a>
     <br></div>
 
 <div class="container text-center mt-2 mb-3">
@@ -116,7 +115,7 @@
 @endif
 
 
-    <button class="btn btn-dark mt-2"><a class="admin-add admin" href={{ url('dashboard/admin/create/employee') }}> <i class="fa fa-plus pr-1"></i>Létrehozás</a></button>
+    <a class="admin-add admin" href={{ url('dashboard/admin/create/employee') }}> <button class="btn btn-dark mt-2"><i class="fa fa-plus pr-1"> Létrehozás</i></button></a>
     <br></div>
 
 @include('footer')

@@ -1,16 +1,33 @@
 @include('header')
-<div class="background">
-    <div class="container d-flex align-items-center py-3">
-        <h2>Üdv!</h2>
-        <a class="logout" href={{ url('logout') }}>
-            <button type="submit" class="btn btn-light logout-btn">Kijelentkezés</button>
-        </a>
-            <a class="logout" href={{ url('dashboard/prevorders') }}>
-                <button type="submit" class="btn btn-light logout-btn">Előző rendelések</button>
-            </a>
-            <a class="logout" href={{ url('dashboard/calculations') }}>
-                <button type="submit" class="btn btn-light logout-btn">Kalkulációk</button>
-            </a>
+<div class="">
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-6">
+                <h2>Üdv, {{ Auth::guard('buyer')->user()->name }}!</h2>
+            </div>
+
+            <div class="col-6 text-right">
+                <a class="logout" href={{ url('logout') }}>
+                    <button type="submit" class="btn btn-light logout-btn">Kijelentkezés</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 text-right">
+                <a class="logout" href={{ url('dashboard/prevorders') }}>
+                    <button type="submit" class="btn btn-dark admin">Előző rendelések</button>
+                </a>
+            </div>
+
+            <div class="col-6 text-left">
+                <a class="logout" href={{ url('dashboard/calculations') }}>
+                    <button type="submit" class="btn btn-dark admin">Kalkulációk</button>
+                </a>
+            </div>
+        </div>
+
+
     </div>
 
         <div class="container">

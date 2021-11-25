@@ -3,7 +3,7 @@
 
 <div class="container text-center mt-2 mb-3">
     @if (count($orders) >= 1)
-        <table class="table table-bordered my-2 m-auto w-75">
+        <table class="table table-bordered my-2 m-auto">
             <thead class="thead golder-header">
             <tr class="text-center">
                 <th colspan="10"><h4><b>Rendelések</b></h4></th>

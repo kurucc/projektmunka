@@ -90,7 +90,6 @@
                                 </div>
                                 <div class="select-button">
                                     <a href="{{ url('cart') }}" class="primary-btn view-card">Kosár</a>
-                                    <a href="#" class="primary-btn checkout-btn">Fizetés</a>
                                 </div>
                             </div>
                     </ul>
@@ -115,7 +114,6 @@
                         <ul class="dropdown">
                             <li><a href="{{ url('products/csempe') }}">Csempék</a></li>
                             <li><a href="{{ url('products/parketta') }}">Parketták</a></li>
-                            <li><a href="./check-out.html">Fizetés</a></li>
                             <li><a href="{{ url('cart') }}">Kosár</a></li>
                             <li><a href="{{ url('auth') }}">Bejelentkezés</a></li>
                         </ul>

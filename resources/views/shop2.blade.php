@@ -118,7 +118,7 @@
                                     @endif
                                 </div>
                                 <div class="pi-text">
-                                    <a href="#">
+                                    <a href="{{ url('products/' . $project->type . '/' . $project->name . '/' . $project->color) }}">
                                         <h4 class="text-capitalize">{{$project->name}}</h4>
                                     </a>
                                     <div class="product-price">
@@ -139,6 +139,7 @@
             </div>
         </div>
     </div>
+        </form>
     </div>
 </section>
 <!-- Product Shop Section End -->

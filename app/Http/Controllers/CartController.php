@@ -28,6 +28,24 @@ class CartController extends Controller
 
         return view('cart', compact('items'));
     }
+
+    public function getOrders()
+    {
+        if(empty(Auth::guard('buyer')->id()))
+        {
+            return redirect('auth');
+        }
+
+        $items = Cart::session(Auth::guard('buyer')->id())->getContent();
+
+        if(count($items) < 1)
+        {
+            return redirect('cart');
+        }
+
+        return view('orders', compact('items'));
+    }
+
     public function orderUniqueProducts(Request $request)
     {
         if($request->has('order')) {
@@ -72,10 +90,11 @@ class CartController extends Controller
                 Cart::session(Auth::guard('buyer')->id())->remove($item->id);
             }
 
-            Mail::to(Auth::guard('buyer')->user()->email)->send(new OrderMail(['name' => Auth::guard('buyer')->user()->username, 'items' => $items,
-            'gross' => $total_gross, 'net' => $total_net]));
+            //TODO ellenőrizni a quantityt
+            //Mail::to(Auth::guard('buyer')->user()->email)->send(new OrderMail(['name' => Auth::guard('buyer')->user()->username, 'items' => $items,
+            //'gross' => $total_gross, 'net' => $total_net]));
 
-            return redirect()->back()->with('success', 'A termékek sikeresen megrendelve!');
+            return redirect('cart')->with('success', 'A termékek sikeresen megrendelve!');
         }
         else if($request->has('delete'))
         {

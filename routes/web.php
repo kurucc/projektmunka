@@ -104,8 +104,9 @@ Route::middleware(['isEmployee'])->group(function () {
 ///---------------CART---------------///
 
 Route::get('cart', [CartController::class,'getUniqueProducts']);
+Route::get('cart/order', [CartController::class,'getOrders']);
 
-Route::post('cart', [CartController::class,'orderUniqueProducts']);
+Route::post('cart/order', [CartController::class,'orderUniqueProducts']);
 Route::get('cart/remove/{id}', [CartController::class,'removeProduct']);
 Route::get('cart/add/{id}', [CartController::class,'updateProductQuantity']);
 Route::get('cart/minus/{id}', [CartController::class,'minusProductQuantity']);
