@@ -42,8 +42,9 @@
                     <td>{{ $order->quantity }}</td>
                     <td>{{ $order->product_name }}</td>
                     <td>{{ $order->color }}</td>
-                    <td><a class="" href="{{url('dashboard/worker/orders/workers/' . $order->order_number)}}"><i
-                                class="fa-check fa">Feladva</i></a></td>
+                    <td>
+                        <a class="" href="{{url('dashboard/worker/orders/workers/' . $order->order_number)}}"><i class="fa-check fa admin-icon">Feladva</i></a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

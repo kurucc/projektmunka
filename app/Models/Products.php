@@ -9,5 +9,19 @@ class Products extends Model
 {
     use HasFactory;
     protected $table = 'products';
+    protected $fillable = [
+        'net_price',
+        'gross_price',
+        'VAT',
+        'actual_stock',
+        'type',
+        'width',
+        'thickness',
+        'unit',
+        'description',
+        'color',
+        'name',
+        'height'
+    ];
     public $timestamps = false;
 }

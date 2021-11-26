@@ -47,6 +47,8 @@ Route::get('logout', [WorkersController::class,
 'logout'])->middleware('authCustom');
 
 Route::get('dashboard/prevorders', [ProductsController::class,'getPreviousOrders'])->middleware('authCustom');
+Route::get('dashboard/profile', [ProductsController::class,'getProfile'])->middleware('authCustom');
+Route::post('dashboard/profile', [ProductsController::class,'postProfile'])->middleware('authCustom');
 Route::get('dashboard/prevorders/{orderId}', [ProductsController::class,'getPreviousOrderItems'])->middleware('authCustom');
 
 Route::get('dashboard/calculations', [ProductsController::class,'getCalculations'])->middleware('authCustom');
@@ -99,6 +101,14 @@ Route::middleware(['isEmployee'])->group(function () {
     Route::get('dashboard/worker/supplies', [EmployeeController::class,'getSupplies']);
     Route::get('dashboard/worker/supplies/csempe', [EmployeeController::class,'getCsempeSupplies']);
     Route::get('dashboard/worker/supplies/parketta', [EmployeeController::class,'getParkettaSupplies']);
+
+    Route::get('dashboard/worker/supplies/add', [EmployeeController::class,'showAddProduct']);
+    Route::post('dashboard/worker/supplies/add', [EmployeeController::class,'addProduct']);
+
+    Route::get('dashboard/worker/supplies/delete/{id}', [EmployeeController::class,'deleteProduct']);
+
+    Route::get('dashboard/worker/supplies/edit/{id}', [EmployeeController::class,'editProduct']);
+    Route::post('dashboard/worker/supplies/edit/{id}', [EmployeeController::class,'saveEditedProduct']);
 });
 
 ///---------------CART---------------///

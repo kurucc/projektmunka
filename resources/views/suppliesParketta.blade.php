@@ -10,6 +10,7 @@
                 <th scope="col">Termék neve</th>
                 <th scope="col">Termék színe</th>
                 <th scope="col">Termék jelenleg raktáron (db)</th>
+                <th scope="col">Műveletek</th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +20,10 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->color }}</td>
                     <td>{{ $product->actual_stock }}</td>
+                    <td>
+                        <a href="{{ url('dashboard/worker/supplies/edit/' . $product->id) }}"><i class="fa fa-edit admin-icon"></i></a>
+                        <a href={{ url('dashboard/worker/supplies/delete/' . $product->id) }}><i class="fa fa-trash admin-icon"></i></a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -26,5 +31,6 @@
     @else
         <h3 class="text-center control">Nem található termék!</h3>
 @endif
+        <a class="admin-add admin" href={{ url('dashboard/worker/supplies/add') }}> <button class="btn btn-dark mt-2"><i class="fa fa-plus pr-1"> Termék hozzáadása</i></button></a>
 </div>
 @include('footer')

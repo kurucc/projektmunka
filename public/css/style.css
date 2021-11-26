@@ -1260,7 +1260,7 @@ background-color:  #dfad51;
     color: #636363;
 }
 
-.product-list .product-item .product-price .crossed{
+.crossed{
     color: #e7ab3c;
     text-decoration: line-through;
     text-decoration-color: #636363;

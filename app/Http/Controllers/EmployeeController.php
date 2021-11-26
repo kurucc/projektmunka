@@ -174,6 +174,14 @@ class EmployeeController extends Controller
 
     function setArrived($id)
     {
+         $orders = Order::where('order_number', '=', $id)
+            ->join('item', 'orders.id', '=', 'item.order_id')
+            ->join('products', 'products.id', 'item.product_id')
+            ->get();
+         foreach ($orders as $order)
+         {
+             Products::where('id', '=', $order->product_id)->update(['actual_stock' => $order->actual_stock + $order->quantity]);
+         }
         Order::where('order_number', '=', $id)->update(['delivered' => 1]);
         return redirect('dashboard/worker/orders');
     }
@@ -185,7 +193,7 @@ class EmployeeController extends Controller
 
     function getCsempeSupplies()
     {
-        $products = Products::select('name', 'color', 'actual_stock', 'type', 'barcode')
+        $products = Products::select('id', 'name', 'color', 'actual_stock', 'type', 'barcode')
             ->where('type', '=', 'csempe')
             ->get();
         return view('suppliesCsempe', compact('products'));
@@ -193,11 +201,85 @@ class EmployeeController extends Controller
 
     function getParkettaSupplies()
     {
-        $products = Products::select('name', 'color', 'actual_stock', 'type', 'barcode')
+        $products = Products::select('id', 'name', 'color', 'actual_stock', 'type', 'barcode')
             ->where('type', '=', 'parketta')
             ->get();
         return view('suppliesParketta', compact('products'));
     }
+
+    function showAddProduct()
+    {
+        return view('addProduct');
+    }
+
+    function deleteProduct(Products $id)
+    {
+        $id->delete();
+        return redirect()->back();
+    }
+
+    function editProduct(Products $id)
+    {
+        return view('editProduct', compact('id'));
+    }
+
+    function saveEditedProduct(Products $id, Request $request)
+    {
+        $id->update([
+        'net_price' => $request->net_price,
+        'gross_price' => $request->gross_price,
+        'VAT' => $request->VAT,
+        'actual_stock' => $request->actual_stock,
+        'type' => $request->type,
+        'width' => $request->width,
+        'thickness' => $request->thickness,
+        'unit' => $request->unit,
+        'description' => $request->description,
+        'sale' => $request->sale,
+        'color' => $request->color,
+        'name' => $request->name,
+        'height' => $request->height
+        ]);
+
+        return redirect()->back();
+    }
+
+    function addProduct(Request $request)
+    {
+        $product = new Products;
+        $product->barcode = $request->barcode;
+        $product->net_price = $request->net_price;
+        $product->gross_price = $request->gross_price;
+        $product->VAT = $request->VAT;
+        $product->actual_stock = $request->actual_stock;
+        $product->type = $request->type;
+        $product->width = $request->width;
+        $product->thickness = $request->thickness;
+        $product->unit = $request->unit;
+        $product->description = $request->description;
+        $product->sale = $request->sale;
+        if(!$request->picture_path)
+        {
+            $product->picture_path = 'images/products/logo_dark.png';
+        }
+        else
+        {
+            $path = $request->file('picture_path')->store('/images/products');
+            if($path != false)
+            {
+                $product->picture_path = $path;
+            }
+        }
+        $product->color = $request->color;
+        $product->name = $request->name;
+        $product->height = $request->height;
+
+        if($product->save())
+        {
+            return redirect('dashboard/worker/supplies');
+        }
+    }
+
     public function saveOrders(Request $request)
     {
         if($request->has('csempeRendeles'))

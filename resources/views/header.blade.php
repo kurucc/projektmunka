@@ -72,7 +72,7 @@
                                     <table>
                                         @foreach(\Cart::session(Auth::guard('buyer')->id())->getContent() as $row)
                                             <tr>
-                                                <td class="si-pic"><img src="{{ URL::asset($row->picture_path) }}"
+                                                <td class="si-pic"><img src="{{ URL::asset('storage/' . $row->associatedModel->picture_path)  }}"
                                                                         alt=""></td>
                                             </tr>
                                             <td class="si-text">

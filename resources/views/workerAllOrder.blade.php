@@ -31,7 +31,7 @@
                     <td>{{ $order->color }}</td>
                     <td>{{ $order->quantity }}</td>
                     <td><a class="" href="{{url('dashboard/worker/orders/workers/' . $order->order_number)}}"><i
-                                class="fa-check fa">Átvéve</i></a></td>
+                                class="fa-check fa admin-icon">Átvéve</i></a></td>
                 </tr>
             @endforeach
             </tbody>

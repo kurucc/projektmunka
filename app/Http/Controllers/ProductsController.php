@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Buyers;
 use App\Models\Calculations;
 use App\Models\Order;
 use App\Models\Products;
@@ -12,6 +13,7 @@ use App\ProductSimilarity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
@@ -237,6 +239,68 @@ class ProductsController extends Controller
         $orders = Users::with('orders')->where('buyer_id', '=', Auth::guard('buyer')->id())->get()[0]['orders'];
 
         return view('previousOrders', compact('orders'));
+    }
+
+    public function getProfile()
+    {
+        return view('profile');
+    }
+
+    public function postProfile(Request $request)
+    {
+        $pw = $request->newPassword ? Hash::make($request->newPassword) : Auth::guard('buyer')->user()->password;
+        $invoice_zip = '';
+        $invoice_city = '';
+        $invoice_address = '';
+
+        $invoice_name = null;
+        $invoice_company = null;
+        $invoice_tax = null;
+
+        if($request->equalcheck)
+        {
+            $invoice_zip = $request->delivery_zip;
+            $invoice_city = $request->delivery_city;
+            $invoice_address = $request->delivery_address;
+        }
+        else
+        {
+            $invoice_zip = $request->invoice_zip;
+            $invoice_city = $request->invoice_city;
+            $invoice_address = $request->invoice_address;
+
+            if($request->individualcheck)
+            {
+                $invoice_name = $request->firstnamereq . ' ' . $request->lastnamereq;
+                $invoice_company = null;
+                $invoice_tax = null;
+            }
+            else
+            {
+                $invoice_name = null;
+                $invoice_company = $request->companyname;
+                $invoice_tax = $request->taxnumber;
+            }
+        }
+
+        Buyers::where('id', '=', Auth::guard('buyer')->id())
+            ->update([
+                'name' => $request->firstname . ' ' . $request->lastname,
+                'birthday' => $request->születésnap,
+                'tel' => $request->telefonszám,
+                'email' => $request->email,
+                'password' => $pw,
+                'delivery_zip' => $request->delivery_zip,
+                'delivery_city' => $request->delivery_city,
+                'delivery_address' => $request->delivery_address,
+                'invoice_name' => $invoice_name,
+                'invoice_company' => $invoice_company,
+                'invoice_tax' => $invoice_tax,
+                'invoice_zip' => $invoice_zip,
+                'invoice_city' => $invoice_city,
+                'invoice_address' => $invoice_address,
+            ]);
+        return redirect('dashboard');
     }
 
     public function getPreviousOrderItems($orderId)

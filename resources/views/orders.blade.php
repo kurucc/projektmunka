@@ -48,8 +48,36 @@
                     <td>{{ Auth::guard('buyer')->user()->email }}</td>
                     <td>{{ Auth::guard('buyer')->user()->tel }}</td>
                     <td>{{ Auth::guard('buyer')->user()->delivery_zip . ' ' . Auth::guard('buyer')->user()->delivery_city . ', ' .
-                         Auth::guard('buyer')->user()->delivery_address }}</td>
+                         Auth::guard('buyer')->user()->delivery_address }}
+                    </td>
                 </tr>
+            </tbody>
+        </table><br><br>
+
+        <table class="table table-bordered my-2 m-auto">
+            <thead class="thead golder-header">
+            <tr class="text-center">
+                <th colspan="10"><h4><b>Számlázási adatok</b></h4></th>
+            </tr>
+            <tr class="text-center">
+
+                <th scope="col">Név/Cég</th>
+                <th scope="col">Cím</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-center">
+                <td>@if(!Auth::guard('buyer')->user()->invoice_name && !Auth::guard('buyer')->user()->invoice_company && !Auth::guard('buyer')->user()->invoice_tax)
+                        {{ Auth::guard('buyer')->user()->name }}
+                    @elseif(Auth::guard('buyer')->user()->invoice_name)
+                        {{ Auth::guard('buyer')->user()->invoice_name }}
+                    @elseif(Auth::guard('buyer')->user()->invoice_company && Auth::guard('buyer')->user()->invoice_tax)
+                        {{ Auth::guard('buyer')->user()->invoice_company }} / {{ Auth::guard('buyer')->user()->invoice_tax }}
+                    @endif
+                </td>
+                <td>{{ Auth::guard('buyer')->user()->invoice_zip . ' ' . Auth::guard('buyer')->user()->invoice_city . ', ' .
+                         Auth::guard('buyer')->user()->invoice_address }}</td>
+            </tr>
             </tbody>
         </table>
 

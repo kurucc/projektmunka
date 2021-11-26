@@ -111,8 +111,8 @@
                     @foreach($projects as $project)
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product-item">
-                                <div class="pi-pic">
-                                    <a href="{{ url('products/' . $project->type . '/' . $project->name . '/' . $project->color) }}"><img src="{{ URL::asset('img/products/product-1.jpg') }}" alt=""></a>
+                                <div class="pi-pic" style="width: fit-content">
+                                    <a href="{{ url('products/' . $project->type . '/' . $project->name . '/' . $project->color) }}"><img src="{{ URL::asset('storage/' . $project->picture_path) }}" width="150px" height="150px"></a>
                                     @if(!empty($project->sale))
                                         <div class="sale pp-sale">Leárazás - {{ $project->sale . '%'}}</div>
                                     @endif
@@ -122,9 +122,9 @@
                                         <h4 class="text-capitalize">{{$project->name}}</h4>
                                     </a>
                                     <div class="product-price">
-                                        {{ $project->gross_price }} Ft
+                                        {{ $project->gross_price - ($project->gross_price * $project->sale/100) }} Ft
                                         @if(!empty($project->sale))
-                                            <span class="crossed">{{ $project->gross_price + ($project->gross_price * $project->sale/100)  }} Ft</span>
+                                            <span class="crossed">{{ $project->gross_price }} Ft</span>
                                         @endif
                                     </div>
                                 </div>

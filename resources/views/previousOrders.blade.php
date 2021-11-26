@@ -24,7 +24,7 @@
                     <td>{{ $order->created_at }}</td>
                     <td>{{ $order->gross_sum }}</td>
                     <td>@if($order->delivered == 1) Elküldve @else Elküldésre vár @endif</td>
-                    <td><a href='{{ url('dashboard/prevorders/' . $order->id) }}'><i class="fa fa-angle-double-right"> Részletek</i></a>
+                    <td><a href='{{ url('dashboard/prevorders/' . $order->id) }}'><i class="fa fa-angle-double-right admin-icon"> Részletek</i></a>
                     </td>
                 </tr>
             @endforeach
