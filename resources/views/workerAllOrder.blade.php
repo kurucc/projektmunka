@@ -41,4 +41,3 @@
 @endif
 </div>
 @include('footer')
-{{--TODO kijavítani az oldal elcsúszást..--}}

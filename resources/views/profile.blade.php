@@ -121,7 +121,6 @@
         </div>
         <br>
 
-        <!--If a person this one shows up-->
         <div class="col-12">
             <label><h5>Számlázási adatok</h5></label>
         </div>
@@ -180,7 +179,7 @@
             </div>
 
         </div>
-        <!--If a company this one shows up-->
+
         <div class="row company" id="company" style="display:none">
             <div class="col-sm-6">
                 <label class="required">Cég név</label> <br>

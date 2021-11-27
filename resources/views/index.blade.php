@@ -1,6 +1,5 @@
 @include('header')
 
-<!-- Hero Section Begin -->
 <section class="hero-section">
     <div class="hero-items owl-carousel">
         <div class="single-hero-items set-bg" data-setbg="img/hero-1.jpg">
@@ -28,9 +27,7 @@
         </div>
     </div>
 </section>
-<!-- Hero Section End -->
 
-<!-- Banner Section Begin -->
 <div class="banner-section spad">
     <div class="container-fluid">
         <div class="row">
@@ -59,6 +56,5 @@
         </div>
     </div>
 </div>
-<!-- Banner Section End -->
 
 @include('footer')

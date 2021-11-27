@@ -9,10 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Burkologic</title>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" type="text/css">
@@ -30,7 +28,6 @@
 
 <body>
 
-<!-- Header Section Begin -->
 <header class="header-section">
     <div class="header-top">
         <div class="container">

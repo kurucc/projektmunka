@@ -1,6 +1,6 @@
 @include('header')
 
-<!-- Breadcrumb Section Begin -->
+
 <div class="breacrumb-section">
     <div class="container">
         <div class="row">
@@ -13,9 +13,9 @@
         </div>
     </div>
 </div>
-<!-- Breadcrumb Section Begin -->
 
-<!-- Product Shop Section Begin -->
+
+
 <section class="product-shop spad">
     <div class="container">
         <form method="GET" action="{{ url()->current() }}">
@@ -133,7 +133,6 @@
                     @endforeach
                 </div>
                 <div class="row justify-content-center paginator">
-                {{--TODO paginator classre justify-content-center-t rakni, hogy középen legyen--}}
                 {{ $projects->appends(request()->query())->links() }}
                 </div>
             </div>
@@ -142,6 +141,6 @@
         </form>
     </div>
 </section>
-<!-- Product Shop Section End -->
+
 
 @include('footer')

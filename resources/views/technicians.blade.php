@@ -1,5 +1,5 @@
 @include('header')
-<!-- Breadcrumb Section Begin -->
+
 <div class="breacrumb-section">
     <div class="container">
         <div class="row">
@@ -12,9 +12,9 @@
         </div>
     </div>
 </div>
-<!-- Breadcrumb Section Begin -->
 
-<!-- Product Shop Section Begin -->
+
+
 <section class="product-shop spad">
     <div class="container">
         <form method="GET" action="{{ url()->current() }}">
@@ -59,26 +59,41 @@
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-list">
-                            @foreach ($techs as $tech)
-                                <p>{{ $tech->name }}</p><br>
-                                <p>{{ $tech->county }}</p>
-                                @if($tech->type === 1)
-                                    <p>Hidegburkoló, Melegburkoló</p>
-                                @elseif($tech->type === 2)
-                                    <p>Melegburkoló</p>
-                                @else
-                                    <p>Hidegburkoló</p>
-                                @endif
-                            @endforeach
+                        @foreach ($techs as $tech)
+                        <div class="card mb-3">
+                            <h5 class="card-header text-center">{{ $tech->name }}</h5>
+                            <div class="card-body">
+                                <h6 class="card-text"><b>Telefonszám:</b> {{ $tech->tel }}</h6>
+                                <h6 class="card-text"><b>E-mail cím:</b> {{ $tech->email }}</h6>
+                                <h6 class="card-text"><b>Weboldal:</b>
+                                    @if($tech->webpage)
+                                        {{ $tech->webpage }}
+                                    @else
+                                        -
+                                    @endif
+                                </h6>
+                                <h6 class="card-text"><b>Megye:</b> {{ $tech->county }}</h6>
+                                <h6 class="card-text"><b>Cím:</b> {{$tech->zip_code . ' ' .$tech->city_name . ', ' . $tech->address }}</h6>
+                                <h6 class="card-text"><b>Foglalkozás:</b>
+                                    @if($tech->type === 1)
+                                        Hidegburkoló, Melegburkoló
+                                    @elseif($tech->type === 2)
+                                        Melegburkoló
+                                    @else
+                                        Hidegburkoló
+                                    @endif
+                            </div>
+                        </div>
+                        @endforeach
                         <div class="row justify-content-center paginator">
-                            {{--TODO paginator classre justify-content-center-t rakni, hogy középen legyen--}}
-                            {{--{{ $projects->appends(request()->query())->links() }}--}}
+                            {{ $techs->appends(request()->query())->links() }}
                         </div>
                     </div>
                 </div>
             </div>
+        </form>
     </div>
 </section>
-<!-- Product Shop Section End -->
+
 
 @include('footer')

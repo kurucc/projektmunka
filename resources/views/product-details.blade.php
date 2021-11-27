@@ -1,6 +1,5 @@
 @include('header')
 <div class="container main-content-wrapper clearfix">
-    <!-- Product Details Area Start -->
     <div class="row">
 
         <div class="breadcrumb-section">

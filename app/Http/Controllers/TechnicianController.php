@@ -21,7 +21,8 @@ class TechnicianController extends Controller
         $cities = Cities::query()
             ->distinct()
             ->pluck('city_name');
-        $query = Technician::query();
+        $query = Technician::query()
+            ->join('cities', 'cities.zip_code', 'technicians.zip_code');
 
         if (!empty($county)) {
             if ($county != 'Összes') {
@@ -30,7 +31,7 @@ class TechnicianController extends Controller
         }
         if (!empty($city)) {
             if ($city != 'Összes') {
-                $query->join('cities', 'cities.zip_code', 'technicians.zip_code')->where('cities.city_name', '=', $city);
+                $query->where('cities.city_name', '=', $city);
             }
         }
         if (!empty($type)) {

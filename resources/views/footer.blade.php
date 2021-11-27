@@ -57,9 +57,9 @@
         </div>
     </div>
 </footer>
-<!-- Footer Section End -->
 
-<!-- Js Plugins -->
+
+
 <script src="{{ URL::asset('js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
